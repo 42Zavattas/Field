@@ -9,8 +9,9 @@ angular.module('fieldApp', [
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/main',
-        controller : 'MainCtrl'
+        templateUrl : 'partials/main',
+        controller  : 'MainCtrl',
+        authenticate: true
       })
       .when('/login', {
         templateUrl: 'partials/login',

@@ -8,11 +8,27 @@
 $dark1: #34495e;
 $light1: #ecf0f1;
 
+$gray: #bdc3c7;
+$yellow: #f1c40f;
+$dark-green: #16a085;
+
+* { @include box-sizing(border-box); }
+
+button, a {
+	cursor: pointer;
+}
+
+a {
+	color: darken($dark1, 15);
+	text-decoration: underline;
+}
+
 body {
 	background: $dark1;
 	font-family: "Dual";
-	font-size: 16px;
-	color: darken($dark1, 10);
+	font-size: 22px;
+	color: darken($dark1, 15);
+	@include user-select(none);
 }
 
 h1 {
@@ -25,14 +41,77 @@ h1 {
 }
 
 h3 {
-	font-size: 1.5em;
-	background: rgba(white, .2);
+	font-size: 24px;
+	background: rgba(white, .4);
 	display: inline-block;
 	padding: 10px 8px 8px 8px;
+	color: darken($dark1, 7);
+	@include box-shadow(rgba(black, .15) 0 1px);
 }
 
-.view {
+.main {
 	width: 500px;
-	margin: 128px auto;
+	margin: 128px auto 64px auto;
 	text-align: center;
+	header {
+		margin-bottom: 97px;
+	}
+}
+
+.shadow {
+	position: fixed;
+	overflow: scroll;
+	top: 0; left: 0; right: 0; bottom: 0;
+	@include background-image(radial-gradient(rgba(black, 0), rgba(black, .1)));
+}
+
+.stacked-form {
+	width: 250px;
+	margin: 48px auto;
+	@include box-shadow(rgba(black, .3) 0 0 20px);
+	@include border-radius(5px);
+	button, input {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		border: none;
+		margin: 0;
+		padding: 20px;
+		outline: none;
+		font-family: 'Dual';
+	}
+	button {
+		background: $gray;
+		&:hover, &:focus {
+			background: $dark-green;
+			color: $light1;
+		}
+		&:active {
+			background: darken($dark-green, 10);
+		}
+	}
+	input {
+		&[type=text], &[type=password], &[type=email] {
+			background: $light1;
+			color: $dark1;
+			padding: 20px;
+			font-size: 18px;
+			&:focus {
+				z-index: 2;
+			}
+		}
+	}
+	.rounded-top {
+		@include border-top-left-radius(5px);
+		@include border-top-right-radius(5px);
+	}
+	.rounded-bottom {
+		@include border-bottom-left-radius(5px);
+		@include border-bottom-right-radius(5px);
+	}
+}
+
+p.info {
+	font-size: 16px;
+	line-height: 24px;
 }
