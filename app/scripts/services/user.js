@@ -9,11 +9,11 @@ angular.module('fieldApp')
         method: 'PUT',
         params: {}
       },
-      get: {
+      get   : {
         method: 'GET',
         params: {
-          id:'me'
+          id: 'me'
         }
       }
-	  });
+    });
   });
