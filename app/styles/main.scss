@@ -21,6 +21,7 @@ h1 {
 	line-height: 160px;
 	color: $light1;
 	@include text-shadow(rgba(black, .4) 5px 5px 0);
+	padding-left: 20px;
 }
 
 h3 {
