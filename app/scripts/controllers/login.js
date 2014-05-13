@@ -10,7 +10,7 @@ angular.module('fieldApp')
 
 			if (form.$valid) {
 				Auth.login({
-					email   : $scope.user.email,
+					login   : $scope.user.login,
 					password: $scope.user.password
 				})
 					.then(function () {

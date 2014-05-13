@@ -20,9 +20,10 @@ angular.module('fieldApp')
 				var cb = callback || angular.noop;
 
 				return Session.save({
-					email   : user.email,
+					login   : user.login,
 					password: user.password
 				}, function (user) {
+					console.log(user);
 					$rootScope.currentUser = user;
 					return cb();
 				}, function (err) {
