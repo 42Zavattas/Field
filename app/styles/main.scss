@@ -12,7 +12,9 @@ $gray: #bdc3c7;
 $yellow: #f1c40f;
 $dark-green: #16a085;
 
-* { @include box-sizing(border-box); }
+* {
+	@include box-sizing(border-box);
+}
 
 button, a {
 	cursor: pointer;
@@ -61,7 +63,10 @@ h3 {
 .shadow {
 	position: fixed;
 	overflow: scroll;
-	top: 0; left: 0; right: 0; bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	@include background-image(radial-gradient(rgba(black, 0), rgba(black, .1)));
 }
 
