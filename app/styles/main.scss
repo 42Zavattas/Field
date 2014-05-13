@@ -48,7 +48,7 @@ h3 {
 	display: inline-block;
 	padding: 10px 8px 8px 8px;
 	color: darken($dark1, 7);
-	@include box-shadow(rgba(black, .15) 0 1px);
+	@include box-shadow(rgba(black, .2) 0 1px 5px);
 }
 
 .main {
@@ -61,12 +61,8 @@ h3 {
 }
 
 .shadow {
-	position: fixed;
-	overflow: scroll;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
 	@include background-image(radial-gradient(rgba(black, 0), rgba(black, .1)));
 }
 
