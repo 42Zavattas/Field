@@ -9,10 +9,7 @@ var user;
 describe('User Model', function () {
   before(function (done) {
     user = new User({
-      provider: 'local',
-      name    : 'Fake User',
-      email   : 'test@test.com',
-      password: 'password'
+      login   : 'yolo'
     });
 
     // Clear users before testing
@@ -41,7 +38,7 @@ describe('User Model', function () {
     });
   });
 
-  it('should fail when saving without an email', function (done) {
+  /*it('should fail when saving without an email', function (done) {
     user.email = '';
     user.save(function (err) {
       should.exist(err);
@@ -55,6 +52,6 @@ describe('User Model', function () {
 
   it("should not authenticate user if password is invalid", function () {
     user.authenticate('blah').should.not.be.true;
-  });
+  });*/
 
 });
