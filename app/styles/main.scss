@@ -74,6 +74,32 @@ h3 {
 	@include background-image(radial-gradient(rgba(black, 0), rgba(black, .1)));
 }
 
+.centered {
+	margin: 0 auto;
+}
+
+.rounded {
+	@include border-radius(5px);
+}
+
+button {
+	font-size: 18px;
+	display: block;
+	border: none;
+	margin: 0;
+	padding: 20px;
+	outline: none;
+	font-family: 'Dual';
+	background: $gray;
+	&:hover, &:focus {
+		background: $dark-green;
+		color: $light1;
+	}
+	&:active {
+		background: darken($dark-green, 10);
+	}
+}
+
 .stacked-form {
 	width: 250px;
 	margin: 0 auto 48px auto;
@@ -101,19 +127,6 @@ h3 {
 		padding: 20px;
 		outline: none;
 		font-family: 'Dual';
-		& + i {
-			background: red;
-		}
-	}
-	button {
-		background: $gray;
-		&:hover, &:focus {
-			background: $dark-green;
-			color: $light1;
-		}
-		&:active {
-			background: darken($dark-green, 10);
-		}
 	}
 	input {
 		&[type=text], &[type=password], &[type=email] {
