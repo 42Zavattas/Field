@@ -9,7 +9,9 @@ $dark1: #34495e;
 $light1: #ecf0f1;
 
 $gray: #bdc3c7;
+$orange: #e67e22;
 $yellow: #f1c40f;
+$blue: #2980b9;
 $dark-green: #16a085;
 
 * {
@@ -23,6 +25,9 @@ button, a {
 a {
 	color: darken($dark1, 15);
 	text-decoration: underline;
+	&:hover {
+		color: $blue;
+	}
 }
 
 body {
@@ -31,6 +36,7 @@ body {
 	font-size: 22px;
 	color: darken($dark1, 15);
 	@include user-select(none);
+	cursor: default;
 }
 
 h1 {
