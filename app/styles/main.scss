@@ -55,7 +55,7 @@ body {
 
 .view {
 	&.ng-enter {
-		animation: fadeInUp 1s;
+		animation: fadeInUp 250ms;
 	}
 }
 
