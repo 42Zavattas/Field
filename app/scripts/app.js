@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('fieldApp', [
-	'ngCookies',
-	'ngResource',
-	'ngSanitize',
-	'ngRoute'
-])
+		'ngCookies',
+		'ngResource',
+		'ngSanitize',
+		'ngRoute',
+		'ngAnimate'
+	])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		$routeProvider
 			.when('/', {

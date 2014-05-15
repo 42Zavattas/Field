@@ -111,6 +111,9 @@ h3 {
 	}
 	input {
 		&[type=text], &[type=password], &[type=email] {
+			&[disabled] {
+				background: $gray;
+			}
 			background: $light1;
 			color: $dark1;
 			padding: 20px;

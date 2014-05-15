@@ -2,22 +2,28 @@
 
 angular.module('fieldApp')
 	.controller('LoginCtrl', function ($scope, Auth, $location) {
-		$scope.user = {};
+
+		$scope.user = { login : 'yolo' };
 		$scope.errors = {};
+		$scope.loading = false;
 
 		$scope.login = function (form) {
+
 			$scope.submitted = true;
+			$scope.invalid = false;
+			$scope.loading = true;
 
 			if (form.$valid) {
-				Auth.login({
-					login   : $scope.user.login,
-					password: $scope.user.password
-				})
-					.then(function () {
-						// Logged in, redirect to home
+
+				Auth
+					.login({
+						login   : $scope.user.login,
+						password: $scope.user.password
+					}).then(function () {
 						$location.path('/');
-					})
-					.catch(function (err) {
+					}).catch(function (err) {
+						$scope.invalid = true;
+						$scope.loading = false;
 						err = err.data;
 						$scope.errors.other = err.message;
 					});
