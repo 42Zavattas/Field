@@ -105,9 +105,21 @@ h3 {
 	@include border-radius(5px);
 }
 
-button {
+a.big-title {
+	color: $light1;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+	}
+	&:hover {
+		color: $light1;
+	}
+}
+
+button, .btn {
+	text-decoration: none;
 	font-size: 18px;
-	display: block;
+	display: inline-block;
 	border: none;
 	margin: 0;
 	padding: 20px;
@@ -138,7 +150,6 @@ button {
 			width: 35px;
 			height: 35px;
 			line-height: 35px;
-			@include text-shadow(rgba(black, .3) 0 1px 2px);
 		}
 	}
 	button, input {
