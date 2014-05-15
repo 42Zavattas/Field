@@ -3,7 +3,7 @@
 angular.module('fieldApp')
 	.controller('LoginCtrl', function ($scope, Auth, $location) {
 
-		$scope.user = { login : 'yolo' };
+		$scope.user = {};
 		$scope.errors = {};
 		$scope.loading = false;
 
