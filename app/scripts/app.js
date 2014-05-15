@@ -27,6 +27,10 @@ angular.module('fieldApp', [
 				controller  : 'SettingsCtrl',
 				authenticate: true
 			})
+			.when('/process', {
+				templateUrl: 'partials/process',
+				controller : 'ProcessCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
