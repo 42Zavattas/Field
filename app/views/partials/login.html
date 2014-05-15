@@ -1,7 +1,14 @@
 <form name="form" ng-submit="login(form)" class="stacked-form" novalidate>
 
-	<input autofocus placeholder="login" type="text" class="rounded-top" ng-model="user.login">
-	<input placeholder="password" type="password" class="form-control" ng-model="user.password">
+	<div class="form-control">
+		<i class="icon-user"></i>
+		<input autofocus placeholder="login" type="text" class="rounded-top" ng-model="user.login">
+	</div>
+
+	<div class="form-control">
+		<i class="icon-lock"></i>
+		<input placeholder="password" type="password" class="form-control" ng-model="user.password">
+	</div>
 
 	<button type="submit" class="rounded-bottom">Login</button>
 
