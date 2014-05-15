@@ -30,6 +30,20 @@ a {
 	}
 }
 
+.logout {
+	position: fixed;
+	top: 8px;
+	right: 8px;
+	button {
+		background: rgba(0, 0, 0, .3);
+		color: rgba(255, 255, 255, .3);
+		padding: 5px;
+		font-size: 13px;
+		border-radius: 3px;
+		border: none;
+	}
+}
+
 body {
 	background: $dark1;
 	font-family: "Dual";
@@ -37,6 +51,12 @@ body {
 	color: darken($dark1, 15);
 	@include user-select(none);
 	cursor: default;
+}
+
+.view {
+	&.ng-enter {
+		animation: fadeInUp 1s;
+	}
 }
 
 h1 {
@@ -69,7 +89,10 @@ h3 {
 
 .shadow {
 	position: fixed;
-	top: 0; left: 0; right: 0; bottom: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	overflow: scroll;
 	@include background-image(radial-gradient(rgba(black, 0), rgba(black, .1)));
 }

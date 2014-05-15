@@ -50,9 +50,12 @@
 		<div class="shadow">
 			<div class="main">
 
+				<div class="logout" ng-show="currentUser">
+					<button ng-click="logout()">logout</button>
+				</div>
+
 				<header>
 					<h1>fIELd</h1>
-
 					<h3>Manage your peer corrections, easily.</h3>
 				</header>
 
