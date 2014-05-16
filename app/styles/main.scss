@@ -33,7 +33,7 @@ a {
 .logout {
 	position: fixed;
 	top: 8px;
-	right: 8px;
+	left: 8px;
 	button {
 		background: rgba(0, 0, 0, .3);
 		color: rgba(255, 255, 255, .3);
@@ -189,4 +189,46 @@ button, .btn {
 p.info {
 	font-size: 16px;
 	line-height: 24px;
+}
+
+.marged {
+	margin-bottom: 2em;
+}
+
+ul.process-list {
+	width: 250px;
+	margin: 0 auto;
+	border: 1px solid rgba(black, .18);
+	@include border-radius(5px);
+	> li {
+		&:first-child {
+			> a {
+				@include border-top-radius(5px);
+			}
+		}
+		&:last-child {
+			> a {
+				@include border-bottom-radius(5px);
+				border-bottom: none;
+			}
+		}
+		> a {
+			font-size: 16px;
+			display: block;
+			padding: 1em;
+			text-align: center;
+			text-decoration: none;
+			border-bottom: 1px dashed rgba(black, .18);
+			&:hover {
+				color: $light1;
+				@include box-shadow(
+					rgba(black, .2) 0 1px inset,
+					rgba(black, .3) 0 -1px inset
+				);
+				@include background-image(
+					linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
+				);
+			}
+		}
+	}
 }

@@ -1,14 +1,13 @@
 <section>
-	<a href="/process" class="btn rounded centered">
+	<a href="/process" class="btn rounded centered marged">
 		Start a correction process
 		<i class="icon-play"></i>
 	</a>
-	processes :
-	<br>
-	<br>
-	<ul>
-		<li ng-repeat="proc in processes">
-			{{ proc.created }}
+	<ul class="process-list">
+		<li ng-repeat="field in fields">
+            <a ng-href="/fields/{{ field._id }}">
+                {{ field.name }}
+            </a>
 		</li>
 	</ul>
 </section>

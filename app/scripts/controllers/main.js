@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('MainCtrl', function ($scope, $http) {
+	.controller('MainCtrl', function ($scope, $resource) {
 
-		$http.get('/api/fields').then(function (res) {
-			$scope.processes = res.data;
-		});
+		var Field = $resource('/api/fields/:id', { id: '@id' });
+
+		$scope.fields = Field.query();
 
 	});
