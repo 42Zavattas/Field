@@ -1,0 +1,21 @@
+<form name="form" ng-submit="login(form)" class="stacked-form animated" ng-class="{ shake : invalid }" novalidate>
+
+	<div class="form-control">
+		<i class="icon-user"></i>
+		<input autofocus placeholder="login" type="text" class="rounded-top" ng-model="user.login" ng-disabled="loading">
+	</div>
+
+	<div class="form-control">
+		<i class="icon-lock"></i>
+		<input placeholder="password" type="password" class="form-control" ng-model="user.password" ng-disabled="loading">
+	</div>
+
+	<button type="submit" class="rounded-bottom">Login</button>
+
+</form>
+
+<p class="info">
+	LDAP connexion
+	<br/>
+	Untrusting ? <a target="_blank" href="https://github.com/42Zavattas/Field">check the sources</a>
+</p>

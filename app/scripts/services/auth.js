@@ -23,7 +23,6 @@ angular.module('fieldApp')
 					login   : user.login,
 					password: user.password
 				}, function (user) {
-					console.log(user);
 					$rootScope.currentUser = user;
 					return cb();
 				}, function (err) {
