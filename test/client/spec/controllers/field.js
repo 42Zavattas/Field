@@ -2,27 +2,30 @@
 
 describe('Controller: FieldCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('fieldApp'));
+	// load the controller's module
+	beforeEach(module('fieldApp'));
 
-  var FieldCtrl,
-    scope,
-    $httpBackend;
+	var FieldCtrl,
+		scope,
+		$httpBackend,
+		data;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
-    $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/awesomeThings')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-    scope = $rootScope.$new();
-    FieldCtrl = $controller('FieldCtrl', {
-      $scope: scope
-    });
-  }));
+	// Initialize the controller and a mock scope
+	beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
+		$httpBackend = _$httpBackend_;
+		/*$httpBackend.expectGET('/api/fields/*')
+			.respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);*/
+		scope = $rootScope.$new();
+		data = {
+			name : 'project name'
+		};
+		FieldCtrl = $controller('FieldCtrl', {
+			$scope: scope,
+			data: data
+		});
+	}));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings).toBeUndefined();
-    $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
-  });
+	it('should load a field', function () {
+		expect(data.name).toBe('project name');
+	});
 });
