@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('fieldApp')
-  .controller('ProcessCtrl', function ($scope, $http) {
-    $http.get('/api/awesomeThings').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+.controller('ProcessCtrl', function ($scope, $http) {
+	$http.get('/api/awesomeThings').success(function(awesomeThings) {
+		$scope.awesomeThings = awesomeThings;
+	});
 	$http.post('/api/fields', {
 		corrections : [],
 		fields: [],
@@ -15,4 +15,4 @@ angular.module('fieldApp')
 	}, function (err) {
 		console.log(err);
 	});
-  });
+});

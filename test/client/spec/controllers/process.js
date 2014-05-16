@@ -14,6 +14,7 @@ describe('Controller: ProcessCtrl', function () {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/awesomeThings')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+    $httpBackend.expectPOST('/api/fields').respond([]);
     scope = $rootScope.$new();
     ProcessCtrl = $controller('ProcessCtrl', {
       $scope: scope
