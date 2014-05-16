@@ -5,4 +5,7 @@ angular.module('fieldApp')
 		$http.get('/api/awesomeThings').success(function (awesomeThings) {
 			$scope.awesomeThings = awesomeThings;
 		});
+		$http.get('/api/fields').then(function (res) {
+			$scope.processes = res.data;
+		});
 	});

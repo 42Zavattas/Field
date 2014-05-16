@@ -5,4 +5,14 @@ angular.module('fieldApp')
     $http.get('/api/awesomeThings').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
+	$http.post('/api/fields', {
+		corrections : [],
+		fields: [],
+		created : new Date(),
+		modified : new Date()
+	}).then(function (res) {
+		console.log(res);
+	}, function (err) {
+		console.log(err);
+	});
   });
