@@ -1,6 +1,7 @@
 {
   "name": "field",
   "version": "0.0.0",
+  "repository": "https://github.com/42Zavattas/Field",
   "dependencies": {
     "body-parser": "~1.0.0",
     "compression": "~1.0.1",
