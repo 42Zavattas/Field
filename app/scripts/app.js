@@ -31,6 +31,16 @@ angular.module('fieldApp', [
 				templateUrl: 'partials/process',
 				controller : 'ProcessCtrl'
 			})
+			.when('/field/:id', {
+				templateUrl: 'partials/field',
+				controller : 'FieldCtrl',
+				resolve    : {
+					data : function ($resource, $route) {
+						var Field = $resource('/api/fields/:id', { id: '@id' });
+						return Field.get({ id: $route.current.params.id }).$promise;
+					}
+				}
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
