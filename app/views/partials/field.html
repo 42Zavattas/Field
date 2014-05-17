@@ -2,7 +2,7 @@
 
 	<div class="form-control">
 		<i class="icon-pencil"></i>
-		<input required tabindex="1" focus-me="true" placeholder="field name" type="text" class="rounded-top"
+		<input required focus-me="true" placeholder="field name" type="text" class="rounded-top"
 		       ng-model="field.name" ng-disabled="loading">
 	</div>
 
@@ -31,6 +31,10 @@
 </form>
 
 <div class="help-small">
+	<a class="info" href="/">
+		<i class="icon-back"></i>
+		<span>go back</span>
+	</a>
 	<a class="danger" ng-click="deleteField()">
 		<i class="icon-cross3"></i>
 		<span>delete</span>

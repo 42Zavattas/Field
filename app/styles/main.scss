@@ -147,7 +147,7 @@ button, .btn {
 
 .stacked-form {
 	width: 250px;
-	margin: 0 auto 48px auto;
+	margin: 0 auto 36px auto;
 	@include box-shadow(rgba(black, .3) 0 0 20px);
 	@include border-radius(5px);
 	.form-control {
@@ -286,9 +286,10 @@ ul.process-list {
 		display: flex;
 		justify-content: center;
 		font-size: 13px;
-		background: rgba($red, .7);
 		text-decoration: none;
 		padding: 5px;
+		margin-left: 2px;
+		margin-right: 2px;
 		border-radius: 3px;
 		border: 1px solid transparent;
 		> i {
@@ -296,12 +297,31 @@ ul.process-list {
 		}
 		&:hover {
 			color: darken($dark1, 15);
-			background: $red;
 		}
-		&:active, &.active {
-			border-color: darken($red, 25);
-			@include box-shadow(rgba(white, .2) 0 1px inset);
+
+		&.danger {
+			background: rgba($red, .7);
+			&:hover {
+				color: darken($dark1, 15);
+				background: $red;
+			}
+			&:active, &.active {
+				border-color: darken($red, 25);
+				@include box-shadow(rgba(white, .2) 0 1px inset);
+			}
 		}
+
+		&.info {
+			background: rgba($blue, .7);
+			&:hover {
+				background: $blue;
+			}
+			&:active, &.active {
+				border-color: darken($red, 25);
+				@include box-shadow(rgba(white, .2) 0 1px inset);
+			}
+		}
+
 	}
 }
 
