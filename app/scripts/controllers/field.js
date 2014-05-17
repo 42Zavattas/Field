@@ -10,7 +10,7 @@ angular.module('fieldApp')
 		$scope.field = data;
 		$scope.addingLogin = false;
 		$scope.newLogin = '';
-		$scope.selectedCorr = $scope.field.corrections[0];
+		$scope.selectedCorr = null;
 
 		$scope.updateField = function () {
 			if ($scope.equal()) {

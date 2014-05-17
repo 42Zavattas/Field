@@ -380,14 +380,15 @@ ul.ui-list {
 	> li {
 		cursor: pointer;
 		padding: 10px;
-		border-bottom: 1px solid rgba(black, .18);
+		border: 1px solid transparent;
+		border-bottom-color: rgba(black, .18);
 		color: darken($dark1, 15);
 		&:first-child {
 			@include border-top-radius(5px);
 		}
 		&:last-child {
 			@include border-bottom-radius(5px);
-			border-bottom: none;
+			border-bottom-color: transparent;
 		}
 		&:hover {
 			color: $light1;
@@ -404,6 +405,7 @@ ul.ui-list {
 				linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
 			);
 			color: darken($light1, 20);
+			border-color: $dark-green;
 		}
 	}
 }
