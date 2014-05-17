@@ -7,23 +7,27 @@
 	</div>
 
 	<div class="logins-list form-control">
+
 		<div class="toolbox" ng-if="addingLogin">
 			<div class="stacked-form">
 				<ng-form>
 					<input class="rounded-top" type="text" focus-me="addingLogin" ng-model="newLogin" required/>
-					<button ng-click="addLogin(newLogin)" type="button" class="rounded-bottom">Add</button>
+					<button ng-disabled="!newLogin" ng-click="addLogin(newLogin)" type="button" class="rounded-bottom">Add</button>
 				</ng-form>
 			</div>
 		</div>
+
 		<i class="icon-users"></i>
 		<ul>
 			<li ng-repeat="corr in field.corrections">
 				{{ corr.targetName }}
 			</li>
 		</ul>
-		<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
-			<i class="icon-plus"></i> Add login
-		</button>
+		<div class="text-centered">
+			<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
+				<i class="icon-plus"></i> Add login
+			</button>
+		</div>
 	</div>
 
 	<button ng-disabled="equal()" type="submit" class="rounded-bottom">Save</button>
@@ -31,12 +35,15 @@
 </form>
 
 <div class="help-small">
+
 	<a class="info" href="/">
 		<i class="icon-back"></i>
 		<span>go back</span>
 	</a>
+
 	<a class="danger" ng-click="deleteField()">
 		<i class="icon-cross3"></i>
 		<span>delete</span>
 	</a>
+
 </div>

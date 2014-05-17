@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('FieldCtrl', function ($scope, data, $http, $location, $timeout) {
+	.controller('FieldCtrl', function ($scope, data, $http, $location, $timeout, $resource) {
 
 		var original = angular.copy(data);
 
+		$scope.logins = $resource('/api/logins').query();
+
 		$scope.field = data;
 		$scope.addingLogin = false;
-
-		console.log($scope.field);
 
 		$scope.updateField = function () {
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
