@@ -1,9 +1,13 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('MainCtrl', function ($scope, $resource, $location) {
+	.controller('MainCtrl', function ($scope, $resource, $location, localStorageService) {
 
 		var Field = $resource('/api/fields/:id', { id: '@id' });
+
+		$scope.correctors = localStorageService.get('field');
+
+		console.log($scope.correctors);
 
 		$scope.fields = Field.query();
 
