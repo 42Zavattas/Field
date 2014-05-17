@@ -5,8 +5,7 @@ angular.module('fieldApp', [
 		'ngResource',
 		'ngSanitize',
 		'ngRoute',
-		'ngAnimate',
-		'LocalStorageModule'
+		'ngAnimate'
 	])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		$routeProvider
