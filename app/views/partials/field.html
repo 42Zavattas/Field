@@ -1,1 +1,10 @@
-<p>This is the field view.</p>
+<form ng-submit="updateField()" class="stacked-form">
+
+	<div class="form-control">
+		<i class="icon-pencil"></i>
+		<input autofocus placeholder="field name" type="text" class="rounded-top" ng-model="field.name" ng-disabled="loading">
+	</div>
+
+	<button type="submit" class="rounded-bottom">Save</button>
+
+</form>
