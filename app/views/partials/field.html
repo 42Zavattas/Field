@@ -1,4 +1,4 @@
-<form ng-submit="updateField()" class="stacked-form">
+<div class="stacked-form">
 
 	<div class="form-control">
 		<i class="icon-pencil"></i>
@@ -10,29 +10,30 @@
 
 		<div class="toolbox" ng-if="addingLogin">
 			<div class="stacked-form">
-				<ng-form>
-					<input class="rounded-top" type="text" focus-me="addingLogin" ng-model="newLogin" required/>
-					<button ng-disabled="!newLogin" ng-click="addLogin(newLogin)" type="button" class="rounded-bottom">Add</button>
-				</ng-form>
+				<input class="rounded-top" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
+				       ui-keypress="{13:'addLogin()'}"/>
+				<button ng-disabled="!newLogin" ng-click="addLogin(newLogin)" type="button" class="rounded-bottom">Add
+				</button>
 			</div>
 		</div>
 
 		<i class="icon-users"></i>
-		<ul>
-			<li ng-repeat="corr in field.corrections">
-				{{ corr.targetName }}
-			</li>
-		</ul>
+
 		<div class="text-centered">
 			<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
 				<i class="icon-plus"></i> Add login
 			</button>
 		</div>
+		<ul>
+			<li ng-repeat="corr in field.corrections">
+				{{ corr.targetName }}
+			</li>
+		</ul>
 	</div>
 
-	<button ng-disabled="equal()" type="submit" class="rounded-bottom">Save</button>
+	<button ng-click="updateField()" ng-disabled="equal()" type="submit" class="rounded-bottom">Save</button>
 
-</form>
+</div>
 
 <div class="help-small">
 

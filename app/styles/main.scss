@@ -317,7 +317,7 @@ ul.process-list {
 				background: $blue;
 			}
 			&:active, &.active {
-				border-color: darken($red, 25);
+				border-color: darken($blue, 25);
 				@include box-shadow(rgba(white, .2) 0 1px inset);
 			}
 		}

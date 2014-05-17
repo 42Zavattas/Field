@@ -9,6 +9,7 @@ angular.module('fieldApp')
 
 		$scope.field = data;
 		$scope.addingLogin = false;
+		$scope.newLogin = 'PUTE';
 
 		$scope.updateField = function () {
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
@@ -32,14 +33,15 @@ angular.module('fieldApp')
 
 		$scope.toggleAddLogin = function () {
 			$scope.addingLogin = !$scope.addingLogin;
+			$scope.newLogin = '';
 		};
 
-		$scope.addLogin = function (login) {
-			if (login) {
-				$scope.field.corrections.push({ targetName: login });
+		$scope.addLogin = function () {
+			console.log($scope.newLogin);
+			if ($scope.newLogin) {
+				$scope.field.corrections.push({ targetName: $scope.newLogin });
 			}
 			$scope.newLogin = '';
-			$scope.addingLogin = false;
 		};
 
 	});
