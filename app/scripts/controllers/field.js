@@ -8,11 +8,15 @@ angular.module('fieldApp')
 		$scope.field = data;
 
 		$scope.updateField = function () {
-			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
+			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
 				$location.path('/');
 			}, function (err) {
 				console.log(err);
 			});
+		};
+
+		$scope.equal = function () {
+			return angular.equals($scope.field, original);
 		};
 
 	});
