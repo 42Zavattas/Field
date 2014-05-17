@@ -9,9 +9,13 @@ angular.module('fieldApp')
 
 		$scope.field = data;
 		$scope.addingLogin = false;
-		$scope.newLogin = 'PUTE';
+		$scope.newLogin = '';
+		$scope.selectedCorr = $scope.field.corrections[0];
 
 		$scope.updateField = function () {
+			if ($scope.equal()) {
+				return;
+			}
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
 				$location.path('/');
 			}, function (err) {
@@ -37,11 +41,17 @@ angular.module('fieldApp')
 		};
 
 		$scope.addLogin = function () {
-			console.log($scope.newLogin);
 			if ($scope.newLogin) {
 				$scope.field.corrections.push({ targetName: $scope.newLogin });
 			}
 			$scope.newLogin = '';
+		};
+
+		$scope.selectCorr = function (corr) {
+			if ($scope.selectedCorr == corr) {
+				return $scope.selectedCorr = null;
+			}
+			$scope.selectedCorr = corr;
 		};
 
 	});
