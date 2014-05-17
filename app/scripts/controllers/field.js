@@ -1,13 +1,21 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('FieldCtrl', function ($scope, data, $http, $location) {
+	.controller('FieldCtrl', function ($scope, data, $http, $location, $timeout, $resource) {
 
 		var original = angular.copy(data);
 
+		$scope.logins = $resource('/api/logins').query();
+
 		$scope.field = data;
+		$scope.addingLogin = false;
+		$scope.newLogin = '';
+		$scope.selectedCorr = null;
 
 		$scope.updateField = function () {
+			if ($scope.equal()) {
+				return;
+			}
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
 				$location.path('/');
 			}, function (err) {
@@ -25,6 +33,25 @@ angular.module('fieldApp')
 
 		$scope.equal = function () {
 			return angular.equals($scope.field, original);
+		};
+
+		$scope.toggleAddLogin = function () {
+			$scope.addingLogin = !$scope.addingLogin;
+			$scope.newLogin = '';
+		};
+
+		$scope.addLogin = function () {
+			if ($scope.newLogin) {
+				$scope.field.corrections.push({ targetName: $scope.newLogin });
+			}
+			$scope.newLogin = '';
+		};
+
+		$scope.selectCorr = function (corr) {
+			if ($scope.selectedCorr == corr) {
+				return $scope.selectedCorr = null;
+			}
+			$scope.selectedCorr = corr;
 		};
 
 	});

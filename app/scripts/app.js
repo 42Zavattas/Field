@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('fieldApp', [
-		'ngCookies',
-		'ngResource',
-		'ngSanitize',
-		'ngRoute',
-		'ngAnimate'
-	])
+	'ngCookies',
+	'ngResource',
+	'ngSanitize',
+	'ngRoute',
+	'ngAnimate',
+	'ui.keypress'
+])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		$routeProvider
 			.when('/', {
@@ -35,7 +36,7 @@ angular.module('fieldApp', [
 				templateUrl: 'partials/field',
 				controller : 'FieldCtrl',
 				resolve    : {
-					data : function ($resource, $route) {
+					data: function ($resource, $route) {
 						var Field = $resource('/api/fields/:id', { id: '@id' });
 						return Field.get({ id: $route.current.params.id }).$promise;
 					}
