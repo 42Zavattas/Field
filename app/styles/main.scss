@@ -13,6 +13,7 @@ $orange: #e67e22;
 $yellow: #f1c40f;
 $blue: #2980b9;
 $dark-green: #16a085;
+$red: #c0392b;
 
 * {
 	@include box-sizing(border-box);
@@ -133,6 +134,15 @@ button, .btn {
 	&:active {
 		background: darken($dark-green, 10);
 	}
+	&[disabled] {
+		color: darken($gray, 10);
+		@include text-shadow(rgba(white, .3) 0 1px);
+		cursor: default;
+		&:hover {
+			cursor: default;
+			background: $gray;
+		}
+	}
 }
 
 .stacked-form {
@@ -230,5 +240,24 @@ ul.process-list {
 				);
 			}
 		}
+	}
+}
+
+.help-small {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 13px;
+	background: $red;
+	text-decoration: none;
+	padding: 5px;
+	border-radius: 3px;
+	border: 1px solid transparent;
+	> i {
+		margin-right: 3px;
+	}
+	&:hover {
+		color: darken($dark1, 15);
+		background: darken($red, 10);
 	}
 }

@@ -15,6 +15,14 @@ angular.module('fieldApp')
 			});
 		};
 
+		$scope.deleteField = function () {
+			$http.delete('/api/fields/' + $scope.field._id).then(function () {
+				$location.path('/');
+			}, function (err) {
+				console.log(err);
+			});
+		};
+
 		$scope.equal = function () {
 			return angular.equals($scope.field, original);
 		};
