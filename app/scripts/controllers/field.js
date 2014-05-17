@@ -7,6 +7,11 @@ angular.module('fieldApp')
 
 		$scope.logins = $resource('/api/logins').query();
 
+		$http.get('/api/users/me').then(function (res) {
+			console.log(res.data);
+		}, function (err) {
+			console.log(err);
+		});
 		$scope.field = data;
 		$scope.addingLogin = false;
 		$scope.newLogin = '';
