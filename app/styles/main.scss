@@ -68,6 +68,15 @@ h1 {
 	@include text-shadow(rgba(black, .4) 5px 5px 0);
 	padding-left: 20px;
 	height: 200px;
+
+	a.big-title {
+		color: $light1;
+		text-decoration: none;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
 }
 
 h3 {
@@ -104,17 +113,6 @@ h3 {
 
 .rounded {
 	@include border-radius(5px);
-}
-
-a.big-title {
-	color: $light1;
-	text-decoration: none;
-	&:hover {
-		text-decoration: none;
-	}
-	&:hover {
-		color: $light1;
-	}
 }
 
 button, .btn {
@@ -155,6 +153,7 @@ button, .btn {
 	.form-control {
 		position: relative;
 		> i {
+			color: darken($dark1, 15);
 			position: absolute;
 			top: 10px;
 			left: -50px;
@@ -177,9 +176,8 @@ button, .btn {
 	button.small {
 		display: inline-block;
 		width: auto;
-		margin: 0 auto;
+		margin: 5px auto;
 		padding: 5px;
-		margin: 5px;
 		font-size: 13px;
 		@include border-radius(3px);
 		background: transparent;
@@ -204,6 +202,7 @@ button, .btn {
 	}
 	input {
 		&[type=text], &[type=password], &[type=email] {
+			@include user-select(text);
 			&[disabled] {
 				background: $gray;
 			}
@@ -283,21 +282,52 @@ ul.process-list {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 13px;
-	background: $red;
-	text-decoration: none;
+	> a {
+		display: flex;
+		justify-content: center;
+		font-size: 13px;
+		background: rgba($red, .7);
+		text-decoration: none;
+		padding: 5px;
+		border-radius: 3px;
+		border: 1px solid transparent;
+		> i {
+			margin-right: 3px;
+		}
+		&:hover {
+			color: darken($dark1, 15);
+			background: $red;
+		}
+		&:active, &.active {
+			border-color: darken($red, 25);
+			@include box-shadow(rgba(white, .2) 0 1px inset);
+		}
+	}
+}
+
+.logins-list {
+	position: relative;
+	color: $light1;
+	font-size: 16px;
+	text-align: left;
 	padding: 5px;
-	border-radius: 3px;
-	border: 1px solid transparent;
-	> i {
-		margin-right: 3px;
+	border-right: 1px solid rgba(white, .5);
+	border-left: 1px solid rgba(white, .5);
+	@include box-shadow(rgba(black, .5) 0 0 8px inset);
+	.toolbox {
+		position: absolute;
+		width: 200px;
+		top: 0;
+		right: -220px;
+		&.ng-enter {
+			animation: fadeInUp 150ms;
+		}
+		&.ng-leave {
+			animation: fadeOutDown 150ms;
+		}
 	}
-	&:hover {
-		color: darken($dark1, 15);
-		background: darken($red, 10);
-	}
-	&:active, &.active {
-		border-color: darken($red, 25);
-		@include box-shadow(rgba(white, .2) 0 1px inset);
-	}
+}
+
+.text-centered {
+	text-align: center;
 }
