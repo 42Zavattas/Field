@@ -21,26 +21,25 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		var checkLogin = function(login) {
-			if ($scope.logins.map(function (e) { return e.login; }).indexOf(login) !== -1
+		$scope.checkLogin = function(login) {
+			if (login && $scope.logins.map(function (e) { return e.login; }).indexOf(login) !== -1
 				&& $scope.field.corrections.map(function (e) { return e.targetName; }).indexOf(login) == -1) {
 				return (true);
 			}
 			return (false);
 		};
 
-		$scope.checkNew = function (login) {
-			if (!login || !checkLogin(login)) {
-				return (false);
-			}
-			return (true);
+		$scope.sendAll = function () {
+			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
+				console.log(res);
+			}, function (err) {
+				console.log(err);
+			});
 		};
 
-		//You probably want to load the develop
-		//branch of TrackMyPeers to check it out...
 		$scope.loadSync = function() {
 			angular.forEach($scope.user.sync.logins, function(target) {
-				if (checkLogin(target)) {
+				if ($scope.checkLogin(target)) {
 					$scope.field.corrections.push({ targetName : target });
 				}
 			});
@@ -75,7 +74,7 @@ angular.module('fieldApp')
 		};
 
 		$scope.addLogin = function () {
-			if ($scope.newLogin && checkLogin($scope.newLogin)) {
+			if ($scope.newLogin && $scope.checkLogin($scope.newLogin)) {
 				$scope.field.corrections.push({ targetName: $scope.newLogin });
 				$scope.newLogin = '';
 			}

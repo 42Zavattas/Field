@@ -12,7 +12,7 @@
 			<div class="inline-form">
 				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
 				       ui-keypress="{13:'addLogin()'}"/>
-				<button ng-disabled="!checkNew(newLogin)" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
+				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
 					<i class="icon-user"></i>
 				</button>
 			</div>
@@ -27,6 +27,10 @@
 
 			<button class="small" type="button" ng-click="loadSync()">
 				<i class="icon-loop"></i> Autoload logins
+			</button>
+			<br>
+			<button class="small featured" type="button" ng-click="sendAll()">
+				<i class="icon-upload2"></i> Email all
 			</button>
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">

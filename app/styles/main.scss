@@ -201,6 +201,10 @@ button, .btn {
 		@include border-radius(3px);
 		background: transparent;
 		border: 1px solid rgba(black, .18);
+		&.featured {
+			width: 100%;
+			font-size: 15px;
+		}
 		&:hover {
 			color: $light1;
 			@include box-shadow(
