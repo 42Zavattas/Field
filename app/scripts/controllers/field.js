@@ -25,7 +25,7 @@ angular.module('fieldApp')
 		//branch of TrackMyPeers to check it out...
 		$scope.loadSync = function() {
 			angular.forEach($scope.user.sync.logins, function(target) {
-				if ($scope.field.corrections.map(function (e) { return e.targetName }).indexOf(target) == -1) {
+				if ($scope.field.corrections.map(function (e) { return e.targetName; }).indexOf(target) === -1) {
 					$scope.field.corrections.push({ targetName : target });
 				}
 			});
@@ -67,8 +67,9 @@ angular.module('fieldApp')
 		};
 
 		$scope.selectCorr = function (corr) {
-			if ($scope.selectedCorr == corr) {
-				return $scope.selectedCorr = null;
+			if ($scope.selectedCorr === corr) {
+				$scope.selectedCorr = null;
+				return;
 			}
 			$scope.selectedCorr = corr;
 		};
