@@ -22,7 +22,7 @@ angular.module('fieldApp')
 		});
 
 		var checkLogin = function(login) {
-			if ($scope.logins.map(function (e) { return e.login }).indexOf(login) !== -1
+			if ($scope.logins.map(function (e) { return e.login; }).indexOf(login) !== -1
 				&& $scope.field.corrections.map(function (e) { return e.targetName; }).indexOf(login) == -1) {
 				return (true);
 			}
