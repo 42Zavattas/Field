@@ -23,9 +23,12 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		$scope.checkLogin = function(login) {
-			if (login && $scope.logins.map(function (e) { return e.login; }).indexOf(login) !== -1
-				&& $scope.field.corrections.map(function (e) { return e.targetName; }).indexOf(login) == -1) {
+		$scope.checkLogin = function (login) {
+			if (login && $scope.logins.map(function (e) {
+				return e.login;
+			}).indexOf(login) !== -1 && $scope.field.corrections.map(function (e) {
+				return e.targetName;
+			}).indexOf(login) === -1) {
 				return (true);
 			}
 			return (false);
@@ -39,10 +42,10 @@ angular.module('fieldApp')
 			});
 		};
 
-		$scope.loadSync = function() {
-			angular.forEach($scope.user.sync.logins, function(target) {
+		$scope.loadSync = function () {
+			angular.forEach($scope.user.sync.logins, function (target) {
 				if ($scope.checkLogin(target)) {
-					$scope.field.corrections.push({ targetName : target });
+					$scope.field.corrections.push({ targetName: target });
 				}
 			});
 			$scope.updateField();
