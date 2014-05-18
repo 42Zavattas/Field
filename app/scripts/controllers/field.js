@@ -23,7 +23,7 @@ angular.module('fieldApp')
 
 		var checkLogin = function(login) {
 			if ($scope.logins.map(function (e) { return e.login }).indexOf(login) !== -1
-				&& $scope.field.corrections.map(function (e) { return e.targetName }).indexOf(login) == -1) {
+				&& $scope.field.corrections.map(function (e) { return e.targetName; }).indexOf(login) == -1) {
 				return (true);
 			}
 			return (false);
@@ -82,8 +82,9 @@ angular.module('fieldApp')
 		};
 
 		$scope.selectCorr = function (corr) {
-			if ($scope.selectedCorr == corr) {
-				return $scope.selectedCorr = null;
+			if ($scope.selectedCorr === corr) {
+				$scope.selectedCorr = null;
+				return;
 			}
 			$scope.selectedCorr = corr;
 		};
