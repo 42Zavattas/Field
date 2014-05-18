@@ -6,19 +6,45 @@
 		       ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateField()'}">
 	</div>
 
-	<div class="logins-list form-control">
+	<div class="form-control pane">
 
-		<div class="toolbox" ng-if="addingLogin">
+		<i class="icon-clock"></i>
+
+		<div class="toolbox left" ng-if="addingTimeSlot">
 			<div class="inline-form">
-				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
-				       ui-keypress="{13:'addLogin()'}"/>
-				<button ng-disabled="!checkNew(newLogin)" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
-					<i class="icon-user"></i>
+				<input class="rounded-left" type="date" focus-me="addingTimeSlot" ng-model="$parent.newTimeSlot.date" required
+				       ui-keypress="{13:'addTimeSlot()'}"/>
+				<input type="time" ng-model="$parent.newTimeSlot.time" required
+				       ui-keypress="{13:'addTimeSlot()'}"/>
+				<button ng-disabled="!checkNewTimeSlot()" ng-click="addTimeSlot()" type="button"
+				        class="rounded-right size-auto">
+					<i class="icon-clock"></i>
 				</button>
 			</div>
 		</div>
 
+		<div class="text-centered">
+			<button class="small" type="button" ng-click="toggleAddTimeSlot()" ng-class="{ active : addingTimeSlot }">
+				<i class="icon-plus"></i> Add time slot
+			</button>
+		</div>
+
+	</div>
+
+	<div class="pane form-control">
+
 		<i class="icon-users"></i>
+
+		<div class="toolbox left" ng-if="addingLogin">
+			<div class="inline-form">
+				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
+				       ui-keypress="{13:'addLogin()'}" placeholder="login"/>
+				<button ng-disabled="!checkNew(newLogin)" ng-click="addLogin(newLogin)" type="button"
+				        class="rounded-right size-auto">
+					<i class="icon-user"></i>
+				</button>
+			</div>
+		</div>
 
 		<div class="text-centered">
 			<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
@@ -30,17 +56,21 @@
 			</button>
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">
-			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr)" ng-class="{ active : selectedCorr == corr }">
+			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr)"
+			    ng-class="{ active : selectedCorr == corr }">
 
 				<div ng-click="preventDefault($event)" ng-if="selectedCorr == corr" class="correction-infos">
 					<p>
-					<img ng-src="https://cdn.42.fr/userprofil/icon/{{ corr.targetName }}.jpg">
-					{{ corr.targetName }}
+						<img ng-src="https://cdn.42.fr/userprofil/icon/{{ corr.targetName }}.jpg">
+						{{ corr.targetName }}
 					</p>
 					due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}
 				</div>
 
-				<span>{{ corr.targetName }}</span>
+				<span>
+					{{ corr.targetName }}
+				</span>
+
 				<div class="extra">
 					<ul>
 						<li>

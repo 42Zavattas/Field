@@ -12,8 +12,10 @@ angular.module('fieldApp')
 
 		$scope.field = data;
 		$scope.addingLogin = false;
+		$scope.addingTimeSlot = true;
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
+		$scope.newTimeSlot = {};
 
 		$http.get('/api/users/me').then(function (res) {
 			$scope.user = res.data;
@@ -36,8 +38,6 @@ angular.module('fieldApp')
 			return (true);
 		};
 
-		//You probably want to load the develop
-		//branch of TrackMyPeers to check it out...
 		$scope.loadSync = function() {
 			angular.forEach($scope.user.sync.logins, function(target) {
 				if (checkLogin(target)) {
@@ -50,8 +50,8 @@ angular.module('fieldApp')
 			if ($scope.equal()) {
 				return;
 			}
-			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
-				$location.path('/');
+			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
+				original = angular.copy(res.data);
 			}, function (err) {
 				console.log(err);
 			});
@@ -71,7 +71,17 @@ angular.module('fieldApp')
 
 		$scope.toggleAddLogin = function () {
 			$scope.addingLogin = !$scope.addingLogin;
+			if ($scope.addingLogin) {
+				$scope.addingTimeSlot = false;
+			}
 			$scope.newLogin = '';
+		};
+
+		$scope.toggleAddTimeSlot = function () {
+			$scope.addingTimeSlot = !$scope.addingTimeSlot;
+			if ($scope.addingTimeSlot) {
+				$scope.addingLogin = false;
+			}
 		};
 
 		$scope.addLogin = function () {
