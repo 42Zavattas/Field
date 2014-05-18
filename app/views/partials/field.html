@@ -31,13 +31,15 @@
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">
 			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr)" ng-class="{ active : selectedCorr == corr }">
-				<div ng-if="selectedCorr == corr" class="correction-infos">
+
+				<div ng-click="preventDefault($event)" ng-if="selectedCorr == corr" class="correction-infos">
 					<p>
 					<img ng-src="https://cdn.42.fr/userprofil/icon/{{ corr.targetName }}.jpg">
 					{{ corr.targetName }}
 					</p>
 					due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}
 				</div>
+
 				<span>{{ corr.targetName }}</span>
 				<div class="extra">
 					<ul>
