@@ -88,4 +88,8 @@ angular.module('fieldApp')
 			$scope.selectedCorr = corr;
 		};
 
+		$scope.preventDefault = function ($event) {
+			$event.stopPropagation();
+		};
+
 	});

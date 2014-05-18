@@ -171,6 +171,7 @@ button, .btn {
 	.form-control {
 		position: relative;
 		> i {
+			font-size: 22px;
 			text-align: center;
 			color: darken($dark1, 15);
 			position: absolute;
