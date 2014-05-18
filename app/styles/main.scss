@@ -339,7 +339,7 @@ ul.process-list {
 	}
 }
 
-.logins-list {
+.pane {
 	position: relative;
 	color: $light1;
 	font-size: 16px;
@@ -347,17 +347,22 @@ ul.process-list {
 	padding: 10px;
 	border-right: 1px solid rgba(white, .5);
 	border-left: 1px solid rgba(white, .5);
+	border-bottom: 1px solid rgba(white, .5);
 	@include box-shadow(rgba(black, .5) 0 0 8px inset);
 	.toolbox {
 		position: absolute;
-		width: 300px;
+		width: 400px;
 		top: 0;
-		right: -320px;
+		right: -420px;
+		&.left {
+			right: auto;
+			left: -420px;
+		}
 		&.ng-enter {
-			animation: fadeInUp 150ms;
+			animation: fadeInRight 150ms;
 		}
 		&.ng-leave {
-			animation: fadeOutDown 150ms;
+			animation: fadeOutRight 150ms;
 		}
 	}
 }
@@ -371,6 +376,9 @@ ul.process-list {
 	@include box-shadow(rgba(black, .3) 0 0 20px);
 	input, button {
 		height: 58px;
+	}
+	input[type=time] {
+		width: 222px;
 	}
 	.size-auto {
 		width: auto;
@@ -423,11 +431,18 @@ ul.ui-list {
 		cursor: default;
 		position: absolute;
 		width: 300px;
-		left: -320px;
+		right: -320px;
 		top: 0;
 		border: 1px solid rgba(black, .18);
-		padding: 10px;
 		@include border-radius(5px);
+		> header {
+			@include border-top-radius(5px);
+			background: rgba(black, .18);
+			padding: 10px;
+		}
+		> section {
+			padding: 10px;
+		}
 		&.ng-enter {
 			animation: fadeInUp 150ms;
 		}
@@ -435,4 +450,20 @@ ul.ui-list {
 			animation: fadeOutDown 150ms;
 		}
 	}
+}
+
+.flex {
+	display: flex;
+	&.centered {
+		align-items: center;
+	}
+}
+
+.padded {
+	padding: 10px;
+}
+
+.profile-img {
+	@include box-shadow(rgba(black, .3) 0 0 20px);
+	border: 2px solid rgba(white, .7);
 }
