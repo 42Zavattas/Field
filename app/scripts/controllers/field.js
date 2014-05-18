@@ -6,16 +6,30 @@ angular.module('fieldApp')
 		var original = angular.copy(data);
 
 		$scope.logins = $resource('/api/logins').query();
+		//var Sync = $resource('/api/users/me');
 
-		$http.get('/api/users/me').then(function (res) {
-			console.log(res.data);
-		}, function (err) {
-			console.log(err);
-		});
+		$scope.user = null;
+
 		$scope.field = data;
 		$scope.addingLogin = false;
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
+
+		$http.get('/api/users/me').then(function (res) {
+			$scope.user = res.data;
+		}, function (err) {
+			console.log(err);
+		});
+
+		//You probably want to load the develop
+		//branch of TrackMyPeers to check it out...
+		$scope.loadSync = function() {
+			angular.forEach($scope.user.sync.logins, function(target) {
+				if ($scope.field.corrections.map(function (e) { return e.targetName }).indexOf(target) == -1) {
+					$scope.field.corrections.push({ targetName : target });
+				}
+			});
+		};
 
 		$scope.updateField = function () {
 			if ($scope.equal()) {

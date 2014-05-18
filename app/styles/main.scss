@@ -171,6 +171,7 @@ button, .btn {
 	.form-control {
 		position: relative;
 		> i {
+			text-align: center;
 			color: darken($dark1, 15);
 			position: absolute;
 			top: 10px;
@@ -308,7 +309,6 @@ ul.process-list {
 		&:hover {
 			color: darken($dark1, 15);
 		}
-
 		&.danger {
 			background: rgba($red, .7);
 			&:hover {
@@ -320,7 +320,6 @@ ul.process-list {
 				@include box-shadow(rgba(white, .2) 0 1px inset);
 			}
 		}
-
 		&.info {
 			background: rgba($blue, .7);
 			&:hover {

@@ -24,6 +24,10 @@
 			<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
 				<i class="icon-plus"></i> Add login
 			</button>
+
+			<button class="small" type="button" ng-click="loadSync()">
+				<i class="icon-loop"></i> Autoload logins
+			</button>
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">
 			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr)" ng-class="{ active : selectedCorr == corr }">
@@ -50,12 +54,12 @@
 
 	<a class="info" href="/">
 		<i class="icon-back"></i>
-		<span>go back</span>
+		<span>Back</span>
 	</a>
 
 	<a class="danger" ng-click="deleteField()">
 		<i class="icon-cross3"></i>
-		<span>delete</span>
+		<span>Delete</span>
 	</a>
 
 </div>
