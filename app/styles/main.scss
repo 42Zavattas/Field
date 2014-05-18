@@ -13,6 +13,7 @@ $orange: #e67e22;
 $yellow: #f1c40f;
 $blue: #2980b9;
 $dark-green: #16a085;
+$red: #c0392b;
 
 * {
 	@include box-sizing(border-box);
@@ -67,6 +68,15 @@ h1 {
 	@include text-shadow(rgba(black, .4) 5px 5px 0);
 	padding-left: 20px;
 	height: 200px;
+
+	a.big-title {
+		color: $light1;
+		text-decoration: none;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
 }
 
 h3 {
@@ -105,44 +115,64 @@ h3 {
 	@include border-radius(5px);
 }
 
-a.big-title {
-	color: $light1;
-	text-decoration: none;
-	&:hover {
-		text-decoration: none;
-	}
-	&:hover {
-		color: $light1;
-	}
+.rounded-top {
+	@include border-top-left-radius(5px);
+	@include border-top-right-radius(5px);
+}
+
+.rounded-bottom {
+	@include border-bottom-left-radius(5px);
+	@include border-bottom-right-radius(5px);
+}
+
+.rounded-left {
+	@include border-left-radius(5px);
+}
+
+.rounded-right {
+	@include border-right-radius(5px);
 }
 
 button, .btn {
 	text-decoration: none;
 	font-size: 18px;
 	display: inline-block;
-	border: none;
 	margin: 0;
 	padding: 20px;
 	outline: none;
 	font-family: 'Dual';
 	background: $gray;
+	border: 1px solid transparent;
 	&:hover, &:focus {
 		background: $dark-green;
 		color: $light1;
 	}
-	&:active {
+	&:active, &.active {
 		background: darken($dark-green, 10);
+		border-color: darken($dark-green, 25);
+		@include box-shadow(rgba(white, .2) 0 1px inset);
+	}
+	&[disabled] {
+		color: darken($gray, 10);
+		@include text-shadow(rgba(white, .3) 0 1px);
+		cursor: default;
+		&:hover {
+			cursor: default;
+			background: $gray;
+		}
 	}
 }
 
 .stacked-form {
 	width: 250px;
-	margin: 0 auto 48px auto;
+	margin: 0 auto 36px auto;
 	@include box-shadow(rgba(black, .3) 0 0 20px);
 	@include border-radius(5px);
 	.form-control {
 		position: relative;
 		> i {
+			text-align: center;
+			color: darken($dark1, 15);
 			position: absolute;
 			top: 10px;
 			left: -50px;
@@ -162,8 +192,36 @@ button, .btn {
 		outline: none;
 		font-family: 'Dual';
 	}
+	button.small {
+		display: inline-block;
+		width: auto;
+		margin: 5px auto;
+		padding: 5px;
+		font-size: 13px;
+		@include border-radius(3px);
+		background: transparent;
+		border: 1px solid rgba(black, .18);
+		&:hover {
+			color: $light1;
+			@include box-shadow(
+				rgba(black, .2) 0 1px inset,
+				rgba(black, .3) 0 -1px inset
+			);
+			@include background-image(
+				linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
+			);
+		}
+		&:active, &.active {
+			@include background-image(
+				linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
+			);
+			color: darken($light1, 20);
+			border-color: $dark-green;
+		}
+	}
 	input {
 		&[type=text], &[type=password], &[type=email] {
+			@include user-select(text);
 			&[disabled] {
 				background: $gray;
 			}
@@ -175,14 +233,6 @@ button, .btn {
 				z-index: 2;
 			}
 		}
-	}
-	.rounded-top {
-		@include border-top-left-radius(5px);
-		@include border-top-right-radius(5px);
-	}
-	.rounded-bottom {
-		@include border-bottom-left-radius(5px);
-		@include border-bottom-right-radius(5px);
 	}
 }
 
@@ -229,6 +279,155 @@ ul.process-list {
 					linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
 				);
 			}
+			&:active, &.active {
+				@include background-image(
+					linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
+				);
+				color: darken($light1, 20);
+			}
+		}
+	}
+}
+
+.help-small {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	> a {
+		display: flex;
+		justify-content: center;
+		font-size: 13px;
+		text-decoration: none;
+		padding: 5px;
+		margin-left: 2px;
+		margin-right: 2px;
+		border-radius: 3px;
+		border: 1px solid transparent;
+		> i {
+			margin-right: 3px;
+		}
+		&:hover {
+			color: darken($dark1, 15);
+		}
+		&.danger {
+			background: rgba($red, .7);
+			&:hover {
+				color: darken($dark1, 15);
+				background: $red;
+			}
+			&:active, &.active {
+				border-color: darken($red, 25);
+				@include box-shadow(rgba(white, .2) 0 1px inset);
+			}
+		}
+		&.info {
+			background: rgba($blue, .7);
+			&:hover {
+				background: $blue;
+			}
+			&:active, &.active {
+				border-color: darken($blue, 25);
+				@include box-shadow(rgba(white, .2) 0 1px inset);
+			}
+		}
+
+	}
+}
+
+.logins-list {
+	position: relative;
+	color: $light1;
+	font-size: 16px;
+	text-align: left;
+	padding: 10px;
+	border-right: 1px solid rgba(white, .5);
+	border-left: 1px solid rgba(white, .5);
+	@include box-shadow(rgba(black, .5) 0 0 8px inset);
+	.toolbox {
+		position: absolute;
+		width: 300px;
+		top: 0;
+		right: -320px;
+		&.ng-enter {
+			animation: fadeInUp 150ms;
+		}
+		&.ng-leave {
+			animation: fadeOutDown 150ms;
+		}
+	}
+}
+
+.text-centered {
+	text-align: center;
+}
+
+.inline-form {
+	display: flex;
+	@include box-shadow(rgba(black, .3) 0 0 20px);
+	input, button {
+		height: 58px;
+	}
+	.size-auto {
+		width: auto;
+	}
+}
+
+ul.ui-list {
+	border: 1px solid rgba(black, .18);
+	margin: 5px 0;
+	@include border-radius(5px);
+	> li {
+		cursor: pointer;
+		padding: 10px;
+		border: 1px solid transparent;
+		border-bottom-color: rgba(black, .18);
+		color: darken($dark1, 15);
+		&:first-child {
+			@include border-top-radius(5px);
+		}
+		&:last-child {
+			@include border-bottom-radius(5px);
+			border-bottom-color: transparent;
+		}
+		&:hover {
+			color: $light1;
+			@include box-shadow(
+				rgba(black, .2) 0 1px inset,
+				rgba(black, .2) 0 -1px inset
+			);
+			@include background-image(
+				linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
+			);
+		}
+		&:active, &.active {
+			@include background-image(
+				linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
+			);
+			color: darken($light1, 20);
+			border-color: $dark-green;
+		}
+	}
+}
+
+.correction {
+	position: relative;
+	.extra {
+		text-align: right;
+	}
+	.correction-infos {
+		cursor: default;
+		position: absolute;
+		width: 300px;
+		left: -320px;
+		top: 0;
+		border: 1px solid rgba(black, .18);
+		padding: 10px;
+		@include border-radius(5px);
+		&.ng-enter {
+			animation: fadeInUp 150ms;
+		}
+		&.ng-leave {
+			animation: fadeOutDown 150ms;
 		}
 	}
 }

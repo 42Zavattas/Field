@@ -1,10 +1,65 @@
-<form ng-submit="updateField()" class="stacked-form">
+<div class="stacked-form">
 
 	<div class="form-control">
 		<i class="icon-pencil"></i>
-		<input autofocus placeholder="field name" type="text" class="rounded-top" ng-model="field.name" ng-disabled="loading">
+		<input required focus-me="true" placeholder="field name" type="text" class="rounded-top"
+		       ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateField()'}">
 	</div>
 
-	<button type="submit" class="rounded-bottom">Save</button>
+	<div class="logins-list form-control">
 
-</form>
+		<div class="toolbox" ng-if="addingLogin">
+			<div class="inline-form">
+				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
+				       ui-keypress="{13:'addLogin()'}"/>
+				<button ng-disabled="!newLogin" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
+					<i class="icon-user"></i>
+				</button>
+			</div>
+		</div>
+
+		<i class="icon-users"></i>
+
+		<div class="text-centered">
+			<button class="small" type="button" ng-click="toggleAddLogin()" ng-class="{ active : addingLogin }">
+				<i class="icon-plus"></i> Add login
+			</button>
+
+			<button class="small" type="button" ng-click="loadSync()">
+				<i class="icon-loop"></i> Autoload logins
+			</button>
+		</div>
+		<ul class="ui-list" ng-if="field.corrections.length">
+			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr)" ng-class="{ active : selectedCorr == corr }">
+				<div ng-if="selectedCorr == corr" class="correction-infos">
+					yolo
+				</div>
+				<span>{{ corr.targetName }}</span>
+				<div class="extra">
+					<ul>
+						<li>
+							<i class="icon-mail"></i>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<button ng-click="updateField()" ng-disabled="equal()" type="submit" class="rounded-bottom">Save</button>
+
+</div>
+
+<div class="help-small">
+
+	<a class="info" href="/">
+		<i class="icon-back"></i>
+		<span>Back</span>
+	</a>
+
+	<a class="danger" ng-click="deleteField()">
+		<i class="icon-cross3"></i>
+		<span>Delete</span>
+	</a>
+
+</div>
