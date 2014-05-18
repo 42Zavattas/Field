@@ -39,7 +39,7 @@
 			<div class="inline-form">
 				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
 				       ui-keypress="{13:'addLogin()'}" placeholder="login"/>
-				<button ng-disabled="!checkNew(newLogin)" ng-click="addLogin(newLogin)" type="button"
+				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin)" type="button"
 				        class="rounded-right size-auto">
 					<i class="icon-user"></i>
 				</button>
