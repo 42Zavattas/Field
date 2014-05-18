@@ -12,7 +12,7 @@ angular.module('fieldApp')
 
 		$scope.field = data;
 		$scope.addingLogin = false;
-		$scope.addingTimeSlot = true;
+		$scope.addingTimeSlot = false;
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
 		$scope.newTimeSlot = {};
@@ -45,6 +45,7 @@ angular.module('fieldApp')
 					$scope.field.corrections.push({ targetName : target });
 				}
 			});
+			$scope.updateField();
 		};
 
 		$scope.updateField = function () {
@@ -52,6 +53,7 @@ angular.module('fieldApp')
 				return;
 			}
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
+				$scope.field = res.data;
 				original = angular.copy(res.data);
 			}, function (err) {
 				console.log(err);
@@ -98,6 +100,10 @@ angular.module('fieldApp')
 				return;
 			}
 			$scope.selectedCorr = corr;
+		};
+
+		$scope.deleteCorr = function (corr) {
+			$scope.field.corrections.splice($scope.field.corrections.indexOf(corr), 1);
 		};
 
 		$scope.preventDefault = function ($event) {

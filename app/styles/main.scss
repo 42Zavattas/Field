@@ -434,8 +434,15 @@ ul.ui-list {
 		right: -320px;
 		top: 0;
 		border: 1px solid rgba(black, .18);
-		padding: 10px;
 		@include border-radius(5px);
+		> header {
+			@include border-top-radius(5px);
+			background: rgba(black, .18);
+			padding: 10px;
+		}
+		> section {
+			padding: 10px;
+		}
 		&.ng-enter {
 			animation: fadeInUp 150ms;
 		}
@@ -443,4 +450,20 @@ ul.ui-list {
 			animation: fadeOutDown 150ms;
 		}
 	}
+}
+
+.flex {
+	display: flex;
+	&.centered {
+		align-items: center;
+	}
+}
+
+.padded {
+	padding: 10px;
+}
+
+.profile-img {
+	@include box-shadow(rgba(black, .3) 0 0 20px);
+	border: 2px solid rgba(white, .7);
 }

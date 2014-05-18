@@ -12,7 +12,8 @@
 
 		<div class="toolbox left" ng-if="addingTimeSlot">
 			<div class="inline-form">
-				<input class="rounded-left" type="date" focus-me="addingTimeSlot" ng-model="$parent.newTimeSlot.date" required
+				<input class="rounded-left" type="date" focus-me="addingTimeSlot" ng-model="$parent.newTimeSlot.date"
+				       required
 				       ui-keypress="{13:'addTimeSlot()'}"/>
 				<input type="time" ng-model="$parent.newTimeSlot.time" required
 				       ui-keypress="{13:'addTimeSlot()'}"/>
@@ -64,11 +65,35 @@
 			    ng-class="{ active : selectedCorr == corr }">
 
 				<div ng-click="preventDefault($event)" ng-if="selectedCorr == corr" class="correction-infos">
-					<p>
-						<img ng-src="https://cdn.42.fr/userprofil/icon/{{ corr.targetName }}.jpg">
-						{{ corr.targetName }}
-					</p>
-					due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}
+
+					<header>
+						<div class="flex centered">
+							<img class="profile-img"
+							     ng-src="https://cdn.42.fr/userprofil/commentview/{{ corr.targetName }}.jpg">
+							<div class="padded">
+								{{ corr.targetName }}
+								<div>
+									<i class="icon-star"></i>
+									<i class="icon-star"></i>
+									<i class="icon-star"></i>
+									<i class="icon-star"></i>
+									<i class="icon-star"></i>
+								</div>
+							</div>
+						</div>
+					</header>
+					<section>
+						due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}
+						<div class="help-small">
+
+							<a class="danger" ng-click="deleteCorr(corr)">
+								<i class="icon-cross3"></i>
+								<span>Delete</span>
+							</a>
+
+						</div>
+					</section>
+
 				</div>
 
 				<span>
