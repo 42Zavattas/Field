@@ -53,11 +53,11 @@
 			</button>
 
 			<button class="small" type="button" ng-click="loadSync()">
-				<i class="icon-loop"></i> Autoload logins
+				<i class="icon-cycle"></i> Autoload logins
 			</button>
 			<br>
 			<button class="small featured" type="button" ng-click="sendAll()">
-				<i class="icon-upload2"></i> Email all
+				<i class="icon-paperplane"></i> Email all
 			</button>
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">
@@ -72,18 +72,22 @@
 							     ng-src="https://cdn.42.fr/userprofil/commentview/{{ corr.targetName }}.jpg">
 							<div class="padded">
 								{{ corr.targetName }}
-								<div>
+								<div class="stars">
 									<i class="icon-star"></i>
 									<i class="icon-star"></i>
 									<i class="icon-star"></i>
 									<i class="icon-star"></i>
 									<i class="icon-star"></i>
 								</div>
+								<p class="mail">
+									<i class="icon-mail"></i>
+									{{ corr.mailedOn | date:'dd/MM hh:mm' }}
+								</p>
 							</div>
 						</div>
 					</header>
 					<section>
-						due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}
+						<p>due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}</p>
 						<div class="help-small">
 
 							<a class="danger" ng-click="deleteCorr(corr)">
@@ -97,13 +101,16 @@
 				</div>
 
 				<span>
+					<i class="icon-cross"></i>
 					{{ corr.targetName }}
 				</span>
 
 				<div class="extra">
 					<ul>
 						<li>
-						<i class="icon-mail" ng-click="sendSpecific($event, corr)" ng-class="{ mailed: corr.mailed }"></i>
+							<i class="icon-calendar"></i>
+							<i class="icon-info2" ng-class="{ hidden: !corr.requests.length }"></i>
+							<i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i>
 						</li>
 					</ul>
 				</div>

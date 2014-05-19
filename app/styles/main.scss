@@ -31,6 +31,10 @@ a {
 	}
 }
 
+.hidden {
+	display: none;
+}
+
 .logout {
 	position: fixed;
 	top: 8px;
@@ -424,13 +428,21 @@ ul.ui-list {
 
 .correction {
 	position: relative;
+	> span {
+		> i {
+			position: absolute;
+			right: 3px;
+			top: 3px;
+			&:hover {
+				color: $red;
+			}
+		}
+	}
 	.extra {
 		text-align: right;
+		width: 90%;
 		li {
 			.icon-mail {
-				&:hover {
-					color: #A3A1A1;
-				};
 				&.mailed {
 					color: $green;
 				}
@@ -449,6 +461,14 @@ ul.ui-list {
 			@include border-top-radius(5px);
 			background: rgba(black, .18);
 			padding: 10px;
+			.mail, .stars {
+				margin-top: 3px;
+			}
+			.mail {
+				> i {
+					vertical-align: middle;
+				}
+			}
 		}
 		> section {
 			padding: 10px;

@@ -36,10 +36,9 @@ angular.module('fieldApp')
 
 		$scope.sendAll = function () {
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
-				if (res.data === 'ok') {
-					angular.forEach($scope.field.corrections, function (corr) {
-						corr.mailed = true;
-					});
+				if (res.data) {
+					$scope.field = res.data;
+					original = angular.copy(res.data);
 				}
 			}, function (err) {
 				console.log(err);
@@ -48,8 +47,9 @@ angular.module('fieldApp')
 
 		$scope.sendSpecific = function ($event, corr) {
 			$http.post('/api/fields/' + $scope.field._id, { target : corr.targetName }).then(function (res) {
-				if (res.data === 'ok') {
-					corr.mailed = true;
+				if (res.data) {
+					$scope.field = res.data;
+					original = angular.copy(res.data);
 				}
 			}, function (err) {
 				console.log(err);
