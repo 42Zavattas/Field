@@ -6,8 +6,7 @@ angular.module('fieldApp', [
 	'ngSanitize',
 	'ngRoute',
 	'ngAnimate',
-	'ui.keypress',
-	'ngQuickDate'
+	'ui.keypress'
 ])
 	.config(function ($routeProvider, $locationProvider, $httpProvider, ngQuickDateDefaultsProvider) {
 		$routeProvider

@@ -12,7 +12,7 @@
 
 		<div class="toolbox left" ng-if="addingTimeSlot">
 			<div class="inline-form">
-				<quick-datepicker ng-model='newTimeSlot'></quick-datepicker>
+				<ng-datetime ng-model="newTimeSlot"></ng-datetime>
 				<input class="rounded-left" type="date" focus-me="addingTimeSlot" ng-model="$parent.newTimeSlot.date"
 				       required
 				       ui-keypress="{13:'addTimeSlot()'}"/>
