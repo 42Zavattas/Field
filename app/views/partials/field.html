@@ -106,7 +106,7 @@
 				<div class="extra">
 					<ul>
 						<li>
-							<i class="icon-calendar" ng-class="{ hidden: corr.dueDate === '1970-01-01T00:00:00.000Z' }"></i>
+							<i class="icon-calendar" ng-class="{ hidden: !corr.dueDate || corr.dueDate === '1970-01-01T00:00:00.000Z' }"></i>
 							<i class="icon-info2" ng-class="{ hidden: !corr.requests.length }"></i>
 							<i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i>
 						</li>
