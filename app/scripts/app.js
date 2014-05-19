@@ -8,7 +8,7 @@ angular.module('fieldApp', [
 	'ngAnimate',
 	'ui.keypress'
 ])
-	.config(function ($routeProvider, $locationProvider, $httpProvider, ngQuickDateDefaultsProvider) {
+	.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl : 'partials/main',
@@ -63,12 +63,6 @@ angular.module('fieldApp', [
 			};
 		}]);
 
-		return ngQuickDateDefaultsProvider.set({
-			closeButtonHtml: '<i class="icon-cross2"></i>',
-			buttonIconHtml: '<i class="icon-clock"></i>',
-			nextLinkHtml: '<i class="icon-arrow-right5"></i>',
-			prevLinkHtml: '<i class="icon-arrow-left5"></i>'
-		});
 	})
 	.run(function ($rootScope, $location, Auth) {
 
