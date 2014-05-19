@@ -12,6 +12,7 @@
 
 		<div class="toolbox left" ng-if="addingTimeSlot">
 			<div class="inline-form">
+				<quick-datepicker ng-model='newTimeSlot'></quick-datepicker>
 				<input class="rounded-left" type="date" focus-me="addingTimeSlot" ng-model="$parent.newTimeSlot.date"
 				       required
 				       ui-keypress="{13:'addTimeSlot()'}"/>
@@ -87,28 +88,25 @@
 						</div>
 					</header>
 					<section>
+						<button class="small">
+							<i class="icon-mail"></i> Email {{ corr.targetName }}
+						</button>
 						<p>due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}</p>
 						<div class="help-small">
-
-							<a class="danger" ng-click="deleteCorr(corr)">
-								<i class="icon-cross3"></i>
-								<span>Delete</span>
-							</a>
-
 						</div>
 					</section>
 
 				</div>
 
 				<span>
-					<i class="icon-cross"></i>
+					<i class="icon-cross" ng-click="deleteCorr(corr)"></i>
 					{{ corr.targetName }}
 				</span>
 
 				<div class="extra">
 					<ul>
 						<li>
-							<i class="icon-calendar"></i>
+							<i class="icon-calendar" ng-class="{ hidden: corr.dueDate === '1970-01-01T00:00:00.000Z' }"></i>
 							<i class="icon-info2" ng-class="{ hidden: !corr.requests.length }"></i>
 							<i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i>
 						</li>

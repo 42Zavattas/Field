@@ -461,6 +461,7 @@ ul.ui-list {
 			@include border-top-radius(5px);
 			background: rgba(black, .18);
 			padding: 10px;
+			margin-bottom: 10px;
 			.mail, .stars {
 				margin-top: 3px;
 			}

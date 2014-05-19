@@ -15,7 +15,8 @@ angular.module('fieldApp')
 		$scope.addingTimeSlot = false;
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
-		$scope.newTimeSlot = {};
+
+		$scope.newTimeSlot = new Date();
 
 		$http.get('/api/users/me').then(function (res) {
 			$scope.user = res.data;
