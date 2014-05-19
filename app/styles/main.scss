@@ -5,15 +5,15 @@
 @include font-face("Reckoner Bold", font-files("reckoner/Reckoner_Bold.ttf"));
 @include font-face("Dual", font-files("dual/Dual-300.otf", "dual/Dual-300.ttf"));
 
-$dark1: #34495e;
-$light1: #ecf0f1;
-
-$gray: #bdc3c7;
-$orange: #e67e22;
-$yellow: #f1c40f;
-$blue: #2980b9;
-$dark-green: #16a085;
-$red: #c0392b;
+$dark1      : #34495e;
+$light1     : #ecf0f1;
+$gray       : #bdc3c7;
+$orange     : #e67e22;
+$yellow     : #f1c40f;
+$blue       : #2980b9;
+$red        : #c0392b;
+$dark-green : #16a085;
+$green      : #5C832F;
 
 * {
 	@include box-sizing(border-box);
@@ -426,6 +426,16 @@ ul.ui-list {
 	position: relative;
 	.extra {
 		text-align: right;
+		li {
+			.icon-mail {
+				&:hover {
+					color: #A3A1A1;
+				};
+				&.mailed {
+					color: $green;
+				}
+			}
+		}
 	}
 	.correction-infos {
 		cursor: default;

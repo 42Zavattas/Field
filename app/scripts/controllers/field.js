@@ -36,10 +36,25 @@ angular.module('fieldApp')
 
 		$scope.sendAll = function () {
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
-				console.log(res);
+				if (res.data === 'ok') {
+					angular.forEach($scope.field.corrections, function (corr) {
+						corr.mailed = true;
+					});
+				}
 			}, function (err) {
 				console.log(err);
 			});
+		};
+
+		$scope.sendSpecific = function ($event, corr) {
+			$http.post('/api/fields/' + $scope.field._id, { target : corr.targetName }).then(function (res) {
+				if (res.data === 'ok') {
+					corr.mailed = true;
+				}
+			}, function (err) {
+				console.log(err);
+			});
+			$event.stopPropagation();
 		};
 
 		$scope.loadSync = function () {
