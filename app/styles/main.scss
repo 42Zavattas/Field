@@ -355,12 +355,12 @@ ul.process-list {
 	@include box-shadow(rgba(black, .5) 0 0 8px inset);
 	.toolbox {
 		position: absolute;
-		width: 400px;
 		top: 0;
 		right: -420px;
+		width: 300px;
 		&.left {
 			right: auto;
-			left: -420px;
+			left: -310px;
 		}
 		&.ng-enter {
 			animation: fadeInRight 150ms;

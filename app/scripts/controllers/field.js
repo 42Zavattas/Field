@@ -24,6 +24,14 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
+		$scope.$watch('newTimeSlot', function () {
+			console.log('okay');
+		});
+
+		$scope.test = function () {
+			$scope.newTimeSlot = new Date();
+		};
+
 		$scope.checkLogin = function (login) {
 			if (login && $scope.logins.map(function (e) {
 				return e.login;
