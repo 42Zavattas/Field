@@ -16,7 +16,7 @@ angular.module('fieldApp')
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
 
-		$scope.newTimeSlot = new Date();
+		$scope.newTimeSlot = { date: new Date() };
 
 		$http.get('/api/users/me').then(function (res) {
 			$scope.user = res.data;
@@ -24,13 +24,9 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		$scope.$watch('newTimeSlot', function () {
-			console.log('okay');
+		$scope.$watch('newTimeSlot.date', function (newVal) {
+			console.log('date changed', newVal);
 		});
-
-		$scope.test = function () {
-			$scope.newTimeSlot = new Date();
-		};
 
 		$scope.checkLogin = function (login) {
 			if (login && $scope.logins.map(function (e) {

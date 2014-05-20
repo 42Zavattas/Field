@@ -10,12 +10,9 @@
 
 		<i class="icon-clock"></i>
 
-		<p>{{ newTimeSlot }}</p>
-		<button ng-click="test()">update</button>
-
 		<div class="toolbox left" ng-if="addingTimeSlot">
 			<div class="inline-form">
-				<ng-datetime value="newTimeSlot"></ng-datetime>
+				<ng-datetime value="newTimeSlot.date"></ng-datetime>
 				<button ng-disabled="!checkNewTimeSlot()" ng-click="addTimeSlot()" type="button"
 				        class="rounded-right size-auto">
 					<i class="icon-clock"></i>
