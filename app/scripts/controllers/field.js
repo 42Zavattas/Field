@@ -25,23 +25,15 @@ angular.module('fieldApp')
 		});
 
 		$scope.checkNewTimeSlot = function () {
-			angular.forEach($scope.field.slots, function (slot) {
-				if (moment(slot.date).format('YYYY-MM-DD HH:mm:ss') === $scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss')) {
-					console.log('pute');
-					return false;
+			if ($scope.newTimeSlot.date) {
+				if ($scope.field.slots.map(function (e) {
+					return (new Date(e.date).getTime());
+				}).indexOf($scope.newTimeSlot.date._d.getTime()) !== -1) {
+					return (false);
 				}
-				console.log(moment(slot.date).format('YYYY-MM-DD HH:mm:ss'));
-				console.log($scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss'));
-				/*var date = new Date(slot.date);
-				var date2 = new Date($scope.newTimeSlot.date);*/
-			});
-			/*
-			if ($scope.newTimeSlot.date && $scope.field.slots.map(function (e) {
-				return new Date(e.date);
-			}).indexOf(new Date($scope.newTimeSlot.date._d.getTime())) === -1) {
-				return true;
-			}*/
-			return true;
+				return (true);
+			}
+			return (false);
 		};
 
 		$scope.addTimeSlot = function () {
