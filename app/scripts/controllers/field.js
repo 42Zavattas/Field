@@ -24,9 +24,33 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		$scope.$watch('newTimeSlot.date', function (newVal) {
-			console.log('date changed', newVal);
-		});
+		$scope.checkNewTimeSlot = function () {
+			angular.forEach($scope.field.slots, function (slot) {
+				if (moment(slot.date).format('YYYY-MM-DD HH:mm:ss') === $scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss')) {
+					console.log('pute');
+					return false;
+				}
+				console.log(moment(slot.date).format('YYYY-MM-DD HH:mm:ss'));
+				console.log($scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss'));
+				/*var date = new Date(slot.date);
+				var date2 = new Date($scope.newTimeSlot.date);*/
+			});
+			/*
+			if ($scope.newTimeSlot.date && $scope.field.slots.map(function (e) {
+				return new Date(e.date);
+			}).indexOf(new Date($scope.newTimeSlot.date._d.getTime())) === -1) {
+				return true;
+			}*/
+			return true;
+		};
+
+		$scope.addTimeSlot = function () {
+			if ($scope.checkNewTimeSlot()) {
+				$scope.field.slots.push({
+					date: new Date($scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss'))
+				});
+			}
+		};
 
 		$scope.checkLogin = function (login) {
 			if (login && $scope.logins.map(function (e) {
@@ -76,6 +100,7 @@ angular.module('fieldApp')
 				return;
 			}
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
+				console.log(res.data);
 				$scope.field = res.data;
 				original = angular.copy(res.data);
 			}, function (err) {
