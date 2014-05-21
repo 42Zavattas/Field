@@ -137,6 +137,10 @@ h3 {
 	@include border-right-radius(5px);
 }
 
+.ng-datetime {
+	@include border-left-radius(5px);
+}
+
 button, .btn {
 	text-decoration: none;
 	font-size: 18px;
