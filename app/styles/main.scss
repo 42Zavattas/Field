@@ -35,6 +35,10 @@ a {
 	display: none;
 }
 
+.nocursor {
+	cursor: default !important;
+}
+
 .logout {
 	position: fixed;
 	top: 8px;
