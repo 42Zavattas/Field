@@ -302,6 +302,24 @@ ul.process-list {
 	}
 }
 
+.slots {
+	color: #19232d;
+	.slot {
+		cursor: pointer;
+		padding: 5px 10px;
+		display: flex;
+		.extra {
+			margin-left: auto;
+			i {
+				vertical-align: middle;
+			}
+		}
+		&:hover {
+			color: white;
+		}
+	}
+}
+
 .help-small {
 	display: flex;
 	justify-content: center;

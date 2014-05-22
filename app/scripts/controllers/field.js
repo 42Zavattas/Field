@@ -40,7 +40,9 @@ angular.module('fieldApp')
 			$scope.$broadcast('showDatetime');
 			if ($scope.checkNewTimeSlot()) {
 				$scope.field.slots.push({
-					date: new Date($scope.newTimeSlot.date)
+					date: new Date($scope.newTimeSlot.date),
+					taken: false,
+					takenBy: null
 				});
 			}
 		};

@@ -26,8 +26,8 @@
 			</button>
 		</div>
 		<div class"text-centered">
-			<ul>
-				<li class="time" ng-repeat="time in field.slots">{{ time.date | date: 'dd/MM/yy HH:mm' }}</li>
+			<ul class="slots">
+				<li class="slot" ng-repeat="slot in field.slots">{{ slot.date | date: 'dd/MM/yy HH:mm' }} <span class="extra"><i class="icon-help"></i><i class="icon-hourglass"></i><i class="icon-checkmark"></i></span></li>
 			</ul>
 		</div>
 
