@@ -13,5 +13,6 @@ Manage your peer-corrections, easily.
 
 	mongod --dbpath ~/custom/path/db
     git clone https://github.com/42Zavattas/Field.git && cd Field
+    git clone https://github.com/Apercu/ng-datetime app/bower_components
 	npm install && bower install
 	grunt serve
