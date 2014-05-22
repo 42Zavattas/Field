@@ -141,7 +141,7 @@ angular.module('fieldApp')
 		};
 
 		$scope.selectCorr = function (corr) {
-			if ($scope.selectedCorr === corr) {
+			if (!corr || ($scope.selectedCorr && $scope.selectedCorr._id === corr._id)) {
 				$scope.selectedCorr = null;
 				return;
 			}
