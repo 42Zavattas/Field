@@ -7,6 +7,8 @@ var should = require('should'),
 var user;
 
 describe('User Model', function () {
+
+	/*
 	before(function (done) {
 		user = new User({
 			login: 'yolo'
@@ -38,7 +40,7 @@ describe('User Model', function () {
 		});
 	});
 
-	/*it('should fail when saving without an email', function (done) {
+	it('should fail when saving without an email', function (done) {
 	 user.email = '';
 	 user.save(function (err) {
 	 should.exist(err);
