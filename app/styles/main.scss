@@ -313,6 +313,11 @@ ul.process-list {
 			i {
 				vertical-align: middle;
 			}
+			.icon-cross2 {
+				&:hover {
+					color: $red;
+				}
+			}
 		}
 		&:hover {
 			color: white;

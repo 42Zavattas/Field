@@ -37,7 +37,6 @@ angular.module('fieldApp')
 		};
 
 		$scope.addTimeSlot = function () {
-			$scope.$broadcast('showDatetime');
 			if ($scope.checkNewTimeSlot()) {
 				$scope.field.slots.push({
 					date: new Date($scope.newTimeSlot.date),
@@ -45,6 +44,10 @@ angular.module('fieldApp')
 					takenBy: null
 				});
 			}
+		};
+
+		$scope.removeTimeSlot = function () {
+			
 		};
 
 		$scope.checkLogin = function (login) {
