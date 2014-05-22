@@ -140,12 +140,12 @@ angular.module('fieldApp')
 			}
 		};
 
-		$scope.selectCorr = function (corr) {
-			if (!corr || ($scope.selectedCorr && $scope.selectedCorr._id === corr._id)) {
+		$scope.selectCorr = function (login) {
+			if (!login || $scope.selectedCorr === login) {
 				$scope.selectedCorr = null;
 				return;
 			}
-			$scope.selectedCorr = corr;
+			$scope.selectedCorr = login;
 		};
 
 		$scope.deleteCorr = function (corr) {
