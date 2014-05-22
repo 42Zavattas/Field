@@ -37,9 +37,10 @@ angular.module('fieldApp')
 		};
 
 		$scope.addTimeSlot = function () {
+			$scope.$broadcast('showDatetime');
 			if ($scope.checkNewTimeSlot()) {
 				$scope.field.slots.push({
-					date: new Date($scope.newTimeSlot.date.format('YYYY-MM-DD HH:mm:ss'))
+					date: new Date($scope.newTimeSlot.date)
 				});
 			}
 		};
