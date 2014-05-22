@@ -46,8 +46,8 @@ angular.module('fieldApp')
 			}
 		};
 
-		$scope.removeTimeSlot = function () {
-			
+		$scope.removeSlot = function (slot) {
+			$scope.field.slots.splice($scope.field.slots.indexOf(slot), 1);
 		};
 
 		$scope.checkLogin = function (login) {
