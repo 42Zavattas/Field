@@ -97,8 +97,11 @@ angular.module('fieldApp')
 			if ($scope.equal()) {
 				return;
 			}
+			//unpopulate user slots
+			angular.forEach($scope.field.slots, function (slot) {
+				slot.takenBy = (slot.takenBy) ? slot.takenBy._id : null;
+			});
 			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
-				console.log(res.data);
 				$scope.field = res.data;
 				original = angular.copy(res.data);
 			}, function (err) {
