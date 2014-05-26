@@ -102,7 +102,7 @@ angular.module('fieldApp')
 			angular.forEach($scope.field.slots, function (slot) {
 				slot.takenBy = (slot.takenBy) ? slot.takenBy._id : null;
 			});
-			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function (res) {
+			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
 				$scope.field = tmp;
 				original = angular.copy(tmp);
 			}, function (err) {

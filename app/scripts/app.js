@@ -30,8 +30,9 @@ angular.module('fieldApp', [
 				authenticate: true
 			})
 			.when('/process', {
-				templateUrl: 'partials/process',
-				controller : 'ProcessCtrl'
+				templateUrl : 'partials/process',
+				controller  : 'ProcessCtrl',
+				authenticate: false
 			})
 			.when('/field/:id', {
 				templateUrl: 'partials/field',
@@ -41,7 +42,8 @@ angular.module('fieldApp', [
 						var Field = $resource('/api/fields/:id', { id: '@id' });
 						return Field.get({ id: $route.current.params.id }).$promise;
 					}
-				}
+				},
+				authenticate: true
 			})
 			.otherwise({
 				redirectTo: '/'

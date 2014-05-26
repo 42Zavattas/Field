@@ -318,6 +318,7 @@ ul.process-list {
 				vertical-align: middle;
 			}
 			.icon-cross2 {
+				cursor: pointer;
 				&:hover {
 					color: $red;
 				}

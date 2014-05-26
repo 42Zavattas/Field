@@ -93,7 +93,7 @@
 						</div>
 					</header>
 					<section>
-						<button class="small">
+						<button class="small" ng-click="sendSpecific($event, corr)">
 							<i class="icon-mail"></i> Email {{ corr.targetName }}
 						</button>
 						<p>due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}</p>
