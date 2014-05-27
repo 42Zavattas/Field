@@ -1,1 +1,16 @@
-<p>This is the process view.</p>
+<div ng-show="!pending">
+	<span class="error">{{ error }}</span>
+	<div ng-show="!error">
+		<div class="associated">
+			<div class="flex">
+				<img ng-src="https://cdn.42.fr/userprofil/commentview/{{ res.target }}.jpg">
+				<i class="icon-switch"></i>
+				<img ng-src="https://cdn.42.fr/userprofil/commentview/{{ res.corrector }}.jpg">
+			</div>
+			Merci ! Vous venez de confirmer le rendez-vous avec <strong>{{ res.target }}</strong> le <strong>{{ res.date }}</strong>.
+		</div>
+	</div>
+</div>
+<div class="loader" ng-hide="!pending">
+	Loading...
+</div>
