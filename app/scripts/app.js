@@ -32,11 +32,6 @@ angular.module('fieldApp', [
 			.when('/process/:data', {
 				templateUrl : 'partials/process',
 				controller  : 'ProcessCtrl',
-				resolve     : {
-					data: function($route) {
-						
-					}
-				},
 				authenticate: false
 			})
 			.when('/field/:id', {

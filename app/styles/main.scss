@@ -474,7 +474,11 @@ ul.ui-list {
 		width: 90%;
 		margin-top: 4px;
 		li {
+			i {
+				vertical-align: middle;
+			}
 			.icon-mail {
+				font-size: 19px;
 				&.mailed {
 					color: $green;
 				}
