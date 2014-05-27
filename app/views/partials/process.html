@@ -1,6 +1,6 @@
 <div ng-show="!pending">
 	<span class="error">{{ error }}</span>
-	<div ng-show="!error">
+	<div ng-if="!error">
 		<div class="associated">
 			<div class="flex">
 				<img ng-src="https://cdn.42.fr/userprofil/commentview/{{ res.target }}.jpg">
