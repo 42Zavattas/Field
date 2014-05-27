@@ -24,8 +24,9 @@ describe('Controller: FieldCtrl', function () {
 			data: data
 		});
 	}));
-
+/*
 	it('should load a field', function () {
 		expect(data.name).toBe('project name');
 	});
+*/
 });

@@ -26,9 +26,9 @@ describe('Controller: MainCtrl', function () {
 	 $httpBackend.flush();
 	 expect(scope.awesomeThings.length).toBe(4);
 	 });*/
-
+/*
 	it('should be obvious', function () {
 		expect(1).toBe(1);
 	});
-
+*/
 });
