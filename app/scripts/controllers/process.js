@@ -14,10 +14,10 @@ angular.module('fieldApp')
 		}).error(function(err) {
 			$scope.pending = false;
 			if (err === 'alreadyTaken') {
-				$scope.error = 'Sorry, this field is already taken by someone, you should try it another one.';
+				$scope.error = 'Sorry, this field is already taken by someone, you should try another one.';
 			}
 			else if (err === 'alreadyHaveABooking') {
-				$scope.error = 'You already have accpeted a booking for this person.';
+				$scope.error = 'You already have accepted a booking for this person.';
 			}
 			else {
 				$scope.error = 'An error occured, please contact us.';
