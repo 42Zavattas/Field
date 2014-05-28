@@ -62,6 +62,7 @@ angular.module('fieldApp')
 		};
 
 		$scope.sendAll = function () {
+			$scope.updateField();
 			if ($scope.field.slots.length === 0) {
 				return;
 			}
@@ -76,6 +77,7 @@ angular.module('fieldApp')
 		};
 
 		$scope.sendSpecific = function ($event, corr) {
+			$scope.updateField();
 			if ($scope.field.slots.length === 0) {
 				return;
 			}
