@@ -62,6 +62,9 @@ angular.module('fieldApp')
 		};
 
 		$scope.sendAll = function () {
+			if ($scope.field.slots.length === 0) {
+				return;
+			}
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
 				if (res.data) {
 					$scope.field = res.data;
@@ -73,6 +76,9 @@ angular.module('fieldApp')
 		};
 
 		$scope.sendSpecific = function ($event, corr) {
+			if ($scope.field.slots.length === 0) {
+				return;
+			}
 			$http.post('/api/fields/' + $scope.field._id, { target : corr.targetName }).then(function (res) {
 				if (res.data) {
 					$scope.field = res.data;

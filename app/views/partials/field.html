@@ -62,7 +62,7 @@
 				<i class="icon-cycle"></i> Autoload logins
 			</button>
 			<br>
-			<button class="small featured" type="button" ng-click="sendAll()">
+			<button class="small featured" type="button" ng-click="sendAll()" ng-disabled="field.slots.length === 0">
 				<i class="icon-paperplane"></i> Email all
 			</button>
 		</div>
@@ -93,7 +93,7 @@
 						</div>
 					</header>
 					<section>
-						<button class="small" ng-click="sendSpecific($event, corr)" ng-hide="corr.mailed">
+						<button class="small" ng-click="sendSpecific($event, corr)" ng-hide="corr.mailed" ng-disabled="field.slots.length === 0">
 							<i class="icon-mail"></i> Email {{ corr.targetName }}
 						</button>
 						<p>due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}</p>
