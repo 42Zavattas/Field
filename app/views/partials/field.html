@@ -27,7 +27,7 @@
 		</div>
 		<div class="text-centered">
 			<ul class="slots">
-				<li class="slot" ng-repeat="slot in field.slots" ng-class="{ nocursor: !slot.taken }" ng-click="selectCorr(slot.takenBy)">{{ slot.date | date: 'dd/MM/yy HH:mm' }}
+				<li class="slot" ng-repeat="slot in field.slots" ng-class="{ nocursor: !slot.taken, active: slot.takenBy && slot.takenBy === selectedCorr }" ng-click="selectCorr(slot.takenBy)">{{ slot.date | date: 'dd/MM/yy HH:mm' }}
 					<span class="extra">
 						<i ng-class="{ 'icon-infinity': !slot.taken, 'icon-hourglass': slot.taken && !slot.done, 'icon-checkmark': slot.done }"></i>
 						<i class="icon-cross2" ng-hide="slot.taken" ng-click="removeSlot(slot)"></i>

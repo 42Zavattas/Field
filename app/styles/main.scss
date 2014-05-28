@@ -322,6 +322,9 @@ ul.process-list {
 				}
 			}
 		}
+		&.active {
+			color: $dark-green;
+		}
 		&:hover {
 			color: white;
 		}
