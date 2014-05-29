@@ -157,7 +157,7 @@ button, .btn {
 		background: $dark-green;
 		color: $light1;
 	}
-	&:active, &.active {
+	&:active:not([disabled]), &.active {
 		background: darken($dark-green, 10);
 		border-color: darken($dark-green, 25);
 		@include box-shadow(rgba(white, .2) 0 1px inset);
@@ -216,7 +216,7 @@ button, .btn {
 			width: 100%;
 			font-size: 15px;
 		}
-		&:hover {
+		&:hover:not([disabled]) {
 			color: $light1;
 			@include box-shadow(
 				rgba(black, .2) 0 1px inset,
@@ -226,7 +226,7 @@ button, .btn {
 				linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
 			);
 		}
-		&:active, &.active {
+		&:active:not([disabled]), &.active {
 			@include background-image(
 				linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
 			);

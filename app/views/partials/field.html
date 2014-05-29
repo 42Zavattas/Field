@@ -44,10 +44,8 @@
 
 		<div class="toolbox left" ng-if="addingLogin">
 			<div class="inline-form">
-				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" required
-				       ui-keypress="{13:'addLogin()'}" placeholder="login"/>
-				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin)" type="button"
-				        class="rounded-right size-auto">
+				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" ui-keypress="{13:'addLogin()'}" placeholder="login" required >
+				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
 					<i class="icon-user"></i>
 				</button>
 			</div>
@@ -104,7 +102,7 @@
 				</div>
 
 				<span>
-					<i class="icon-cross" ng-click="deleteCorr(corr)"></i>
+					<i class="icon-cross" ng-click="deleteCorr(corr)" ng-if="!corr.dueDate"></i>
 					{{ corr.targetName }}
 				</span>
 

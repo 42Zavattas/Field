@@ -161,6 +161,9 @@ angular.module('fieldApp')
 		};
 
 		$scope.deleteCorr = function (corr) {
+			if (corr.dueDate) {
+				return;
+			}
 			$scope.field.corrections.splice($scope.field.corrections.indexOf(corr), 1);
 		};
 
