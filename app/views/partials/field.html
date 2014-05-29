@@ -85,7 +85,7 @@
 								</div>
 								<p class="mail">
 									<i class="icon-mail" ng-if="corr.mailed"></i>
-									{{ corr.mailedOn | date:'dd/MM hh:mm' }}
+									{{ corr.mailedOn | date:'dd/MM HH:mm' }}
 								</p>
 							</div>
 						</div>
@@ -94,7 +94,7 @@
 						<button class="small" ng-click="sendSpecific($event, corr)" ng-hide="corr.mailed" ng-disabled="field.slots.length === 0">
 							<i class="icon-mail"></i> Email {{ corr.targetName }}
 						</button>
-						<p>due date : {{ corr.dueDate | date:'dd/MM hh:mm' }}</p>
+						<p>due date : {{ corr.dueDate | date:'dd/MM HH:mm' }}</p>
 						<div class="help-small">
 						</div>
 					</section>
