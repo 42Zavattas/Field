@@ -1,13 +1,17 @@
 <section>
-	<a ng-click="createAndLaunch()" class="btn rounded centered marged">
-		Start a new correction process
-		<i class="icon-play"></i>
+<a ng-click="createAndLaunch()" class="btn rounded centered marged">
+	Start a new correction process
+	<i class="icon-play"></i>
+</a>
+<ul class="process-list" ng-show="fields.length">
+	<li ng-repeat="field in fields">
+	<a ng-href="/field/{{ field._id }}">
+		{{ field.name }}
 	</a>
-	<ul class="process-list" ng-show="fields.length">
-		<li ng-repeat="field in fields">
-            <a ng-href="/field/{{ field._id }}">
-                {{ field.name }}
-            </a>
-		</li>
-	</ul>
+	</li>
+</ul>
+</section>
+<hr class="custom">
+<section>
+	Bookings :
 </section>
