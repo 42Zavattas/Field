@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('MainCtrl', function ($scope, $resource, $location) {
+	.controller('MainCtrl', function ($scope, $resource, $location, $http) {
 
 		var Field = $resource('/api/fields/:id', { id: '@id' });
 
@@ -13,5 +13,9 @@ angular.module('fieldApp')
 				$location.path('/field/' + field._id);
 			});
 		};
+
+		$http.get('/api/fields', {params:{toUser: true}}).then(function(res){
+			console.log(res);
+		});
 
 	});

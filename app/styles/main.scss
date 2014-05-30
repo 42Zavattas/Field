@@ -160,6 +160,9 @@ button, .btn {
 	font-family: 'Dual';
 	background: $gray;
 	border: 1px solid transparent;
+	i {
+		vertical-align: middle;
+	}
 	&:hover, &:focus {
 		background: $dark-green;
 		color: $light1;
