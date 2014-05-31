@@ -15,7 +15,7 @@ angular.module('fieldApp')
 		};
 
 		$http.get('/api/fields', {params:{toUser: true}}).then(function(res){
-			console.log(res);
+			$scope.bookings = res.data;
 		});
 
 	});
