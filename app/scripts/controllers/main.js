@@ -6,6 +6,7 @@ angular.module('fieldApp')
 		var Field = $resource('/api/fields/:id', { id: '@id' });
 
 		$scope.fields = Field.query();
+		$scope.activeCorrectors = true;
 
 		$scope.createAndLaunch = function () {
 			var field = new Field();
@@ -17,5 +18,9 @@ angular.module('fieldApp')
 		$http.get('/api/fields', {params:{toUser: true}}).then(function(res){
 			$scope.bookings = res.data;
 		});
+
+		$scope.toggleMenu = function () {
+			$scope.activeCorrectors = !$scope.activeCorrectors;
+		};
 
 	});

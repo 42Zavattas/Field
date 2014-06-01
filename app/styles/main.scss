@@ -1,5 +1,6 @@
 @import 'compass/reset';
 @import 'compass/css3';
+@import 'compass/css3/transition';
 
 @include font-face("Reckoner", font-files("reckoner/Reckoner.ttf"));
 @include font-face("Reckoner Bold", font-files("reckoner/Reckoner_Bold.ttf"));
@@ -44,6 +45,65 @@ hr.custom {
 
 .nocursor {
 	cursor: default !important;
+}
+
+.toggle {
+	margin: 25px auto;
+	position: relative;
+	padding: 0;
+	height: 30px;
+	cursor: pointer;
+	background-color: #464747;
+	width: 300px;
+	color: white;
+	> span {
+		position: absolute;
+		width: 100%;
+		margin: 0;
+		left: -100px;
+		padding-right: 100px;
+		> span {
+			top: 0;
+			left: 0;
+			position: absolute;
+			height: 100%;
+			z-index: 5;
+			width: 50%;
+			margin-left: 100px;
+			opacity: 0;
+			padding: 5px;
+			@include transition(opacity .1s);
+			&:last-child {
+				left: 50%;
+			}
+			&:first-of-type {
+				opacity: 1;
+			}
+		}
+	}
+	a {
+		top: 0;
+		background-color: #666;
+		display: block;
+		position: absolute;
+		width: 50%;
+		height: 100%;
+		z-index: 4;
+		right: 50%;
+		@include transition(right, .3s ease-out);
+		&.active {
+			right: 0%;
+			background-color: #0E88B1;
+			& ~ span span {
+				&:first-of-type {
+					opacity: 0;
+				}
+				&:last-of-type {
+					opacity: 1;
+				}
+			}
+		}
+	}
 }
 
 .logout {
