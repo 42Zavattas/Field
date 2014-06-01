@@ -89,7 +89,7 @@ hr.custom {
 		height: 100%;
 		z-index: 4;
 		right: 50%;
-		background-color: rgba(white, .4);
+		background-color: $green;
 		border-left: 1px solid rgba(black, .3);
 		@include transition(right, .3s ease-out);
 		@include border-left-radius(5px);
@@ -376,6 +376,23 @@ ul.process-list {
 				);
 				color: darken($light1, 20);
 			}
+		}
+	}
+}
+
+ul.bookings {
+	li {
+		display: flex;
+		padding: 10px;
+		align-items: center;
+		border-bottom: 1px dashed rgba(black, .2);
+		img {
+			border: 2px solid rgba(white, .4);
+			margin-right: 10px;
+			@include border-radius(50%);
+		}
+		&:last-child {
+			border-bottom: none
 		}
 	}
 }

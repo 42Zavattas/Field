@@ -21,10 +21,10 @@
 			<span>Corrected</span>
 		</span>
 	</div>
-	<ul class="process-list">
+	<ul class="process-list bookings">
 		<li ng-repeat="booking in bookings">
-				<img >
-			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ booking.user.login }}.jpg"> {{ booking.date | date: 'dd/MM/yy HH:mm' }}
+			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ booking.user.login }}.jpg">
+			<span>{{ booking.date | date: 'dd/MM/yy HH:mm' }}</span>
 			<div class="extra">
 				<i ng-class=""></i>
 			</div>
