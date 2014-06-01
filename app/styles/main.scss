@@ -51,11 +51,11 @@ hr.custom {
 	margin: 25px auto;
 	position: relative;
 	padding: 0;
-	height: 30px;
+	height: 40px;
 	cursor: pointer;
-	background-color: #464747;
-	width: 300px;
+	width: 250px;
 	color: white;
+	border: 1px solid rgba(black, .3);
 	> span {
 		position: absolute;
 		width: 100%;
@@ -71,7 +71,7 @@ hr.custom {
 			width: 50%;
 			margin-left: 100px;
 			opacity: 0;
-			padding: 5px;
+			padding: 10px;
 			@include transition(opacity .1s);
 			&:last-child {
 				left: 50%;
@@ -83,17 +83,23 @@ hr.custom {
 	}
 	a {
 		top: 0;
-		background-color: #666;
 		display: block;
 		position: absolute;
 		width: 50%;
 		height: 100%;
 		z-index: 4;
 		right: 50%;
+		background-color: rgba(white, .4);
+		border-left: 1px solid rgba(black, .3);
 		@include transition(right, .3s ease-out);
+		@include border-left-radius(5px);
 		&.active {
 			right: 0%;
-			background-color: #0E88B1;
+			background-color: $dark-green;
+			border-right: 1px solid rgba(black, .3);
+			border-left: none;
+			@include border-right-radius(5px);
+			@include border-left-radius(0);
 			& ~ span span {
 				&:first-of-type {
 					opacity: 0;
