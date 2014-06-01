@@ -15,16 +15,25 @@
 <section>
 	Next bookings as a
 	<div class="toggle rounded" ng-click="toggleMenu()">
-		<a ng-class="{ 'active': activeCorrectors }"></a>
+		<a ng-class="{ 'active': correctorMode }"></a>
 		<span>
-			<span>Corrector</span>
 			<span>Corrected</span>
+			<span>Corrector</span>
 		</span>
 	</div>
-	<ul class="process-list bookings">
-		<li ng-repeat="booking in bookings">
-			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ booking.user.login }}.jpg">
-			<span>{{ booking.date | date: 'dd/MM/yy HH:mm' }}</span>
+	<ul class="process-list bookings" ng-if="!correctorMode">
+		<li ng-repeat="field in nexts.corrected">
+			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ field.name }}.jpg">
+			<span>{{ field.date | date: 'dd/MM/yy HH:mm' }}</span>
+			<div class="extra">
+				<i ng-class=""></i>
+			</div>
+		</li>
+	</ul>
+	<ul class="process-list bookings"  ng-if="correctorMode">
+		<li ng-repeat="field in nexts.corrector">
+			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ field.user.login }}.jpg">
+			<span>{{ field.date | date: 'dd/MM/yy HH:mm' }}</span>
 			<div class="extra">
 				<i ng-class=""></i>
 			</div>
