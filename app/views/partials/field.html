@@ -29,7 +29,7 @@
 			<ul class="slots">
 				<li class="slot" ng-repeat="slot in field.slots" ng-class="{ nocursor: !slot.taken, active: slot.takenBy && slot.takenBy === selectedCorr }" ng-click="selectCorr(slot.takenBy)">{{ slot.date | date: 'dd/MM/yy HH:mm' }}
 					<span class="extra">
-						<span tooltip="Status"><i ng-class="{ 'icon-infinity': !slot.taken, 'icon-hourglass': slot.taken && !slot.done, 'icon-checkmark': slot.done }"></i></span>
+						<span ng-attr-tooltip="{{ !slot.taken && 'Free' || slot.taken && !slot.done && 'Waiting' || 'Done' }}"><i ng-class="{ 'icon-infinity': !slot.taken, 'icon-hourglass': slot.taken && !slot.done, 'icon-checkmark': slot.done }"></i></span>
 						<i class="icon-cross2" ng-hide="slot.taken" ng-click="removeSlot(slot)"></i>
 					</span>
 				</li>
@@ -108,7 +108,7 @@
 				<div class="extra">
 					<ul>
 						<li>
-							<span tooltip="Mail status"><i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i></span>
+							<span ng-attr-tooltip="{{ corr.mailed && 'Mailed' || 'Not mailed' }}"><i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i></span>
 							<span tooltip="Booked"><i class="icon-calendar" ng-class="{ hidden: !corr.dueDate || corr.dueDate === '1970-01-01T00:00:00.000Z' }"></i></span>
 							<i class="icon-info2" ng-class="{ hidden: !corr.requests.length }"></i>
 						</li>
