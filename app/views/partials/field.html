@@ -2,8 +2,8 @@
 
 	<div class="form-control">
 		<i class="icon-pencil"></i>
-		<input required focus-me="true" placeholder="field name" type="text" class="rounded-top"
-		       ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateField()'}">
+		<input required focus-me="true" placeholder="Project Name" type="text" class="rounded-top"
+		       ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateName()'}">
 	</div>
 
 	<div class="form-control pane">
@@ -30,7 +30,7 @@
 				<li class="slot" ng-repeat="slot in field.slots" ng-class="{ nocursor: !slot.taken, active: slot.takenBy && slot.takenBy === selectedCorr }" ng-click="selectCorr(slot.takenBy)">{{ slot.date | date: 'dd/MM/yy HH:mm' }}
 					<span class="extra">
 						<span ng-attr-tooltip="{{ !slot.taken && 'Free' || slot.taken && !slot.done && 'Waiting' || 'Done' }}"><i ng-class="{ 'icon-infinity': !slot.taken, 'icon-hourglass': slot.taken && !slot.done, 'icon-checkmark': slot.done }"></i></span>
-						<i class="icon-cross2" ng-hide="slot.taken" ng-click="removeSlot(slot)"></i>
+						<i class="icon-cross2" ng-hide="slot.taken" ng-click="removeSlot($event, slot)"></i>
 					</span>
 				</li>
 			</ul>
@@ -44,8 +44,8 @@
 
 		<div class="toolbox left" ng-if="addingLogin">
 			<div class="inline-form">
-				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" ui-keypress="{13:'addLogin()'}" placeholder="login" required >
-				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin)" type="button" class="rounded-right size-auto">
+				<input class="rounded-left" type="text" focus-me="addingLogin" ng-model="$parent.newLogin" ui-keypress="{13:'addLogin(newLogin, true)'}" placeholder="login" required >
+				<button ng-disabled="!checkLogin(newLogin)" ng-click="addLogin(newLogin, true)" type="button" class="rounded-right size-auto">
 					<i class="icon-user"></i>
 				</button>
 			</div>
@@ -60,7 +60,7 @@
 				<i class="icon-cycle"></i> Autoload logins
 			</button>
 			<br>
-			<button class="small featured" type="button" ng-click="sendAll()" ng-disabled="field.slots.length === 0 || field.corrections.length === 0">
+			<button class="small featured" type="button" ng-click="sendAll()" ng-disabled="field.corrections.length === 0 || !checkEnoughtTimes(field.corrections.length)">
 				<i class="icon-paperplane"></i> Email all
 			</button>
 		</div>
@@ -91,7 +91,7 @@
 						</div>
 					</header>
 					<section>
-						<button class="small" ng-click="sendSpecific($event, corr)" ng-hide="corr.mailed" ng-disabled="field.slots.length === 0">
+						<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes(1)">
 							<i class="icon-mail"></i> Email {{ corr.targetName }}
 						</button>
 						<div class="help-small">

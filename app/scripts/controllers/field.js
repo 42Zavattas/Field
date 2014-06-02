@@ -23,49 +23,35 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		$scope.loadSync = function () {
-			angular.forEach($scope.user.sync.logins, function (target) {
-				if ($scope.checkLogin(target)) {
-					$scope.field.corrections.push({ targetName: target });
-				}
-			});
-			$scope.updateField();
-		};
-
-		$scope.updateField = function () {
-			if ($scope.equal()) {
-				return;
-			}
-			var tmp = angular.copy($scope.field);
-			angular.forEach($scope.field.slots, function (slot) {
-				slot.takenBy = (slot.takenBy) ? slot.takenBy._id : null;
-			});
-			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
-				$scope.field = tmp;
-				original = angular.copy(tmp);
-			}, function (err) {
-				console.log(err);
-			});
-		};
-
 		/*
-		** Adds
+		** Adds / Updates
 		*/
-		$scope.addLogin = function () {
-			if ($scope.newLogin && $scope.checkLogin($scope.newLogin)) {
+		$scope.addLogin = function (login, reset) {
+			if (login && $scope.checkLogin(login)) {
 				var newLogin = {
 					target: null,
-					targetName: $scope.newLogin,
+					targetName: login,
 					mailed: false,
 					mailedOn: null
 				};
 				$http.put('/api/fields/' + $scope.field._id, { addLogin: newLogin }).then(function (res) {
 					$scope.field.corrections.push(newLogin);
-					$scope.newLogin = '';
+					if (reset) {
+						$scope.newLogin = '';
+					}
 				}, function (err) {
 					console.log(err);
 				});
 			}
+		};
+
+		$scope.loadSync = function () {
+			angular.forEach($scope.user.sync.logins, function (target) {
+				if (target && $scope.checkLogin(target)) {
+					$scope.addLogin(target, false);
+				}
+			});
+			$scope.updateField();
 		};
 
 		$scope.addTimeSlot = function () {
@@ -78,6 +64,15 @@ angular.module('fieldApp')
 				};
 				$http.put('/api/fields/' + $scope.field._id, { addSlot: newSlot }).then(function (res) {
 					$scope.field.slots.push(newSlot);
+				}, function (err) {
+					console.log(err);
+				});
+			}
+		};
+
+		$scope.updateName = function() {
+			if ($scope.field.name && $scope.field.name.length > 0) {
+				$http.put('/api/fields/' + $scope.field._id, { name: $scope.field.name }).then(function () {
 				}, function (err) {
 					console.log(err);
 				});
@@ -98,7 +93,8 @@ angular.module('fieldApp')
 			});
 		};
 
-		$scope.removeSlot = function (slot) {
+		$scope.removeSlot = function ($event, slot) {
+			$event.stopPropagation();
 			if (slot.taken) {
 				return;
 			}
@@ -121,9 +117,12 @@ angular.module('fieldApp')
 		** Mails
 		*/
 		$scope.sendAll = function () {
-			$scope.updateField();
-			if ($scope.field.slots.length === 0) {
-				return;
+			var cpt = 0;
+			angular.forEach($scope.field.corrections, function (corr) {
+				cpt += (!corr.dueDate) ? 1 : 0;
+			});
+			if ($scope.checkEnoughtTimes(cpt)) {
+				return ;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
 				if (res.data) {
@@ -136,9 +135,8 @@ angular.module('fieldApp')
 		};
 
 		$scope.sendSpecific = function (corr) {
-			$scope.updateField();
-			if ($scope.field.slots.length === 0) {
-				return;
+			if (!$scope.checkEnoughtTimes(1)) {
+				return ;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target : corr.targetName }).then(function (res) {
 				if (res.data) {
@@ -163,6 +161,20 @@ angular.module('fieldApp')
 				return (true);
 			}
 			return (false);
+		};
+
+		$scope.checkEnoughtTimes = function (count) {
+			if ($scope.field.slots.length === 0) {
+				return (false);
+			}
+			var countFree = 0;
+			angular.forEach($scope.field.slots, function (slot) {
+				countFree += (!slot.taken) ? 1 : 0;
+			});
+			if (count > countFree) {
+				return (false);
+			}
+			return (true);
 		};
 
 		$scope.checkLogin = function (login) {
