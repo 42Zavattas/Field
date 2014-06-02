@@ -8,7 +8,8 @@ angular.module('fieldApp', [
 	'ngAnimate',
 	'ui.keypress',
 	'ngDatetime',
-	'angular-intro'
+	'angular-intro',
+	'ui.bootstrap'
 ])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		$routeProvider

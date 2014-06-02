@@ -75,11 +75,7 @@
 							<div class="padded">
 								{{ corr.targetName }}
 								<div class="stars">
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
+									<rating value="corr.reputation" state-on="'icon-star'" state-off="'icon-star2'" readonly="true"></rating>
 								</div>
 								<p class="mail">
 									<i class="icon-mail" ng-if="corr.mailed"></i>
@@ -91,6 +87,10 @@
 							</div>
 						</div>
 					</header>
+					<section>
+						Validate
+						<rating value="corr.reputation" state-on="'icon-star'" state-off="'icon-star2'"></rating>
+					</section>
 
 				</div>
 
