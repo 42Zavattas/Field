@@ -23,43 +23,103 @@ angular.module('fieldApp')
 			console.log(err);
 		});
 
-		$scope.checkNewTimeSlot = function () {
-			if ($scope.newTimeSlot.date) {
-				if ($scope.field.slots.map(function (e) {
-					return (new Date(e.date).getTime());
-				}).indexOf($scope.newTimeSlot.date._d.getTime()) !== -1) {
-					return (false);
+		$scope.loadSync = function () {
+			angular.forEach($scope.user.sync.logins, function (target) {
+				if ($scope.checkLogin(target)) {
+					$scope.field.corrections.push({ targetName: target });
 				}
-				return (true);
-			}
-			return (false);
+			});
+			$scope.updateField();
 		};
 
-		$scope.addTimeSlot = function () {
-			if ($scope.checkNewTimeSlot()) {
-				$scope.field.slots.push({
-					date: new Date($scope.newTimeSlot.date),
-					taken: false,
-					takenBy: null
+		$scope.updateField = function () {
+			if ($scope.equal()) {
+				return;
+			}
+			var tmp = angular.copy($scope.field);
+			angular.forEach($scope.field.slots, function (slot) {
+				slot.takenBy = (slot.takenBy) ? slot.takenBy._id : null;
+			});
+			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
+				$scope.field = tmp;
+				original = angular.copy(tmp);
+			}, function (err) {
+				console.log(err);
+			});
+		};
+
+		/*
+		** Adds
+		*/
+		$scope.addLogin = function () {
+			if ($scope.newLogin && $scope.checkLogin($scope.newLogin)) {
+				var newLogin = {
+					target: null,
+					targetName: $scope.newLogin,
+					mailed: false,
+					mailedOn: null
+				};
+				$http.put('/api/fields/' + $scope.field._id, { addLogin: newLogin }).then(function (res) {
+					$scope.field.corrections.push(newLogin);
+					$scope.newLogin = '';
+				}, function (err) {
+					console.log(err);
 				});
 			}
 		};
 
-		$scope.removeSlot = function (slot) {
-			$scope.field.slots.splice($scope.field.slots.indexOf(slot), 1);
-		};
-
-		$scope.checkLogin = function (login) {
-			if (login && $scope.logins.map(function (e) {
-				return e.login;
-			}).indexOf(login) !== -1 && $scope.field.corrections.map(function (e) {
-				return e.targetName;
-			}).indexOf(login) === -1) {
-				return (true);
+		$scope.addTimeSlot = function () {
+			if ($scope.checkNewTimeSlot()) {
+				var newSlot = {
+					date: new Date($scope.newTimeSlot.date),
+					taken: false,
+					takenBy: null,
+					done: false
+				};
+				$http.put('/api/fields/' + $scope.field._id, { addSlot: newSlot }).then(function (res) {
+					$scope.field.slots.push(newSlot);
+				}, function (err) {
+					console.log(err);
+				});
 			}
-			return (false);
 		};
 
+		/*
+		** Deletes
+		*/
+		$scope.deleteCorr = function (corr) {
+			if (corr.dueDate) {
+				return;
+			}
+			$http.put('/api/fields/' + $scope.field._id, { removeLogin: corr.targetName }).then(function (res) {
+				$scope.field.corrections.splice($scope.field.corrections.indexOf(corr), 1);
+			}, function (err) {
+				console.log(err);
+			});
+		};
+
+		$scope.removeSlot = function (slot) {
+			if (slot.taken) {
+				return;
+			}
+			$http.put('/api/fields/' + $scope.field._id, { removeSlot: slot.date }).then(function (res) {
+				$scope.field.slots.splice($scope.field.slots.indexOf(slot), 1);
+			}, function (err) {
+				console.log(err);
+			});
+		};
+
+		$scope.deleteField = function () {
+			$http.delete('/api/fields/' + $scope.field._id).then(function () {
+				$location.path('/');
+			}, function (err) {
+				console.log(err);
+			});
+		};
+
+		/*
+		** Mails
+		*/
 		$scope.sendAll = function () {
 			$scope.updateField();
 			if ($scope.field.slots.length === 0) {
@@ -75,7 +135,7 @@ angular.module('fieldApp')
 			});
 		};
 
-		$scope.sendSpecific = function ($event, corr) {
+		$scope.sendSpecific = function (corr) {
 			$scope.updateField();
 			if ($scope.field.slots.length === 0) {
 				return;
@@ -88,47 +148,37 @@ angular.module('fieldApp')
 			}, function (err) {
 				console.log(err);
 			});
-			$event.stopPropagation();
 		};
 
-		$scope.loadSync = function () {
-			angular.forEach($scope.user.sync.logins, function (target) {
-				if ($scope.checkLogin(target)) {
-					$scope.field.corrections.push({ targetName: target });
+		/*
+		** Checks
+		*/
+		$scope.checkNewTimeSlot = function () {
+			if ($scope.newTimeSlot.date) {
+				if ($scope.field.slots.map(function (e) {
+					return (new Date(e.date).getTime());
+				}).indexOf($scope.newTimeSlot.date._d.getTime()) !== -1) {
+					return (false);
 				}
-			});
-			$scope.updateField();
-		};
-
-		$scope.updateField = function () {
-			if ($scope.equal()) {
-				return;
+				return (true);
 			}
-			var tmp = angular.copy($scope.field);
-			//unpopulate user slots
-			angular.forEach($scope.field.slots, function (slot) {
-				slot.takenBy = (slot.takenBy) ? slot.takenBy._id : null;
-			});
-			$http.put('/api/fields/' + $scope.field._id, $scope.field).then(function () {
-				$scope.field = tmp;
-				original = angular.copy(tmp);
-			}, function (err) {
-				console.log(err);
-			});
+			return (false);
 		};
 
-		$scope.deleteField = function () {
-			$http.delete('/api/fields/' + $scope.field._id).then(function () {
-				$location.path('/');
-			}, function (err) {
-				console.log(err);
-			});
+		$scope.checkLogin = function (login) {
+			if (login && login !== $scope.user.login && $scope.logins.map(function (e) {
+				return e.login;
+			}).indexOf(login) !== -1 && $scope.field.corrections.map(function (e) {
+				return e.targetName;
+			}).indexOf(login) === -1) {
+				return (true);
+			}
+			return (false);
 		};
 
-		$scope.equal = function () {
-			return angular.equals($scope.field, original);
-		};
-
+		/*
+		** Toggles menus
+		*/
 		$scope.toggleAddLogin = function () {
 			$scope.addingLogin = !$scope.addingLogin;
 			if ($scope.addingLogin) {
@@ -144,13 +194,6 @@ angular.module('fieldApp')
 			}
 		};
 
-		$scope.addLogin = function () {
-			if ($scope.newLogin && $scope.checkLogin($scope.newLogin)) {
-				$scope.field.corrections.push({ targetName: $scope.newLogin });
-				$scope.newLogin = '';
-			}
-		};
-
 		$scope.selectCorr = function (login) {
 			if (!login || $scope.selectedCorr === login) {
 				$scope.selectedCorr = null;
@@ -159,15 +202,15 @@ angular.module('fieldApp')
 			$scope.selectedCorr = login;
 		};
 
-		$scope.deleteCorr = function (corr) {
-			if (corr.dueDate) {
-				return;
-			}
-			$scope.field.corrections.splice($scope.field.corrections.indexOf(corr), 1);
-		};
-
+		/*
+		** Utils
+		*/
 		$scope.preventDefault = function ($event) {
 			$event.stopPropagation();
+		};
+
+		$scope.equal = function () {
+			return angular.equals($scope.field, original);
 		};
 
 	});

@@ -113,7 +113,6 @@ hr.custom {
 }
 
 [tooltip] {
-	//display: inline;
 	position: relative;
 	cursor: pointer;
 	&:hover:before {
@@ -122,9 +121,9 @@ hr.custom {
 		position: absolute;
 		border-right: 5px solid transparent;
 		border-left: 5px solid transparent;
-		border-bottom: 5px solid  rgba(black, .7);
-		top: 20px;
-		left: 4px;
+		border-top: 5px solid  rgba(black, .7);
+		top: -7px;
+		left: 2px;
 		z-index: 999;
 	}
 	&:hover:after {
@@ -134,7 +133,7 @@ hr.custom {
 		display: block;
 		position: absolute;
 		background-color: rgba(black, .7);
-		top: 25px;
+		top: -30px;
 		left: 0px;
 		z-index: 999;
 		padding: 5px 10px;
@@ -283,6 +282,12 @@ button, .btn {
 	margin: 0 auto 36px auto;
 	@include box-shadow(rgba(black, .3) 0 0 20px);
 	@include border-radius(5px);
+	.messages {
+		font-family: 'Dual';
+		font-size: 16px;
+		padding: 20px;
+		background-color: $gray;
+	}
 	.form-control {
 		position: relative;
 		> i {
