@@ -32,6 +32,18 @@ a {
 	}
 }
 
+i {
+	vertical-align: middle;
+}
+
+.introjs-tooltiptext {
+	font-size: 15px;
+}
+
+.introjs-button {
+	height: 22px;
+}
+
 hr.custom {
 	border: 0;
 	border-top: 1px solid rgba(black, .1);
@@ -269,7 +281,6 @@ button, .btn {
 	}
 	&[disabled] {
 		color: darken($gray, 10);
-		@include text-shadow(rgba(white, .3) 0 1px);
 		cursor: default;
 		&:hover {
 			cursor: default;
@@ -463,6 +474,8 @@ ul.bookings {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
+	width: 200px;
 	> a {
 		display: flex;
 		justify-content: center;
@@ -560,29 +573,23 @@ ul.ui-list {
 		border: 1px solid transparent;
 		border-bottom-color: rgba(black, .18);
 		color: darken($dark1, 15);
-		&:first-child {
-			@include border-top-radius(5px);
-		}
 		&:last-child {
-			@include border-bottom-radius(5px);
 			border-bottom-color: transparent;
 		}
 		&:hover {
-			color: $light1;
-			@include box-shadow(
-				rgba(black, .2) 0 1px inset,
-				rgba(black, .2) 0 -1px inset
-			);
-			@include background-image(
-				linear-gradient(bottom, darken($dark1, 15), darken($dark1, 10))
-			);
+			background-color: darken($dark1, 5);
+			color: darken($light1, 20);
 		}
 		&:active, &.active {
-			@include background-image(
-				linear-gradient(top, darken($dark1, 15), darken($dark1, 10))
-			);
+			background-color: darken($dark1, 10);
 			color: darken($light1, 20);
 			border-color: $dark-green;
+			&:first-child {
+				@include border-top-radius(5px);
+			}
+			&:last-child {
+				@include border-bottom-radius(5px);
+			}
 		}
 	}
 }
@@ -623,10 +630,10 @@ ul.ui-list {
 		border: 1px solid rgba(black, .18);
 		@include border-radius(5px);
 		> header {
-			@include border-top-radius(5px);
+			@include border-radius(5px);
 			background: rgba(black, .18);
 			padding: 10px;
-			margin-bottom: 10px;
+			margin-bottom: 0;
 			.mail, .stars {
 				margin-top: 3px;
 			}

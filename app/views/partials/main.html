@@ -6,13 +6,13 @@
 <ul class="process-list" ng-show="fields.length">
 	<li ng-repeat="field in fields">
 	<a ng-href="/field/{{ field._id }}">
-		{{ field.name }}
+		{{ field.name || 'No Name Specified' }}
 	</a>
 	</li>
 </ul>
 </section>
 <hr class="custom">
-<section>
+<section ng-if="nexts.corrector.length > 0 || nexts.corrected.length > 0">
 	Next bookings as a
 	<div class="toggle rounded" ng-click="toggleMenu()">
 		<a ng-class="{ 'active': correctorMode }"></a>
@@ -21,7 +21,7 @@
 			<span>Corrector</span>
 		</span>
 	</div>
-	<ul class="process-list bookings" ng-if="!correctorMode">
+	<ul class="process-list bookings" ng-if="!correctorMode && nexts.corrected.length > 0">
 		<li ng-repeat="field in nexts.corrected">
 			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ field.name }}.jpg">
 			<span>{{ field.date | date: 'dd/MM/yy HH:mm' }}</span>
@@ -30,7 +30,7 @@
 			</div>
 		</li>
 	</ul>
-	<ul class="process-list bookings"  ng-if="correctorMode">
+	<ul class="process-list bookings"  ng-if="correctorMode && nexts.corrector.length > 0">
 		<li ng-repeat="field in nexts.corrector">
 			<img ng-src="https://cdn.42.fr/userprofil/icon/{{ field.user.login }}.jpg">
 			<span>{{ field.date | date: 'dd/MM/yy HH:mm' }}</span>

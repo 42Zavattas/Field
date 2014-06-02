@@ -10,29 +10,25 @@ angular.module('fieldApp')
 		$scope.user = null;
 
 		$scope.field = data;
+		$scope.saveField = $scope.field;
 		$scope.addingLogin = false;
 		$scope.addingTimeSlot = false;
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
+		$scope.errorMessage = null;
 
 		$scope.newTimeSlot = { date: null };
 
-		$http.get('/api/users/me').then(function (res) {
-			$scope.user = res.data;
-		}, function (err) {
-			console.log(err);
-		});
-
 		/*
-		** Adds / Updates
-		*/
+		 ** Adds / Updates
+		 */
 		$scope.addLogin = function (login, reset) {
 			if (login && $scope.checkLogin(login)) {
 				var newLogin = {
-					target: null,
+					target    : null,
 					targetName: login,
-					mailed: false,
-					mailedOn: null
+					mailed    : false,
+					mailedOn  : null
 				};
 				$http.put('/api/fields/' + $scope.field._id, { addLogin: newLogin }).then(function (res) {
 					$scope.field.corrections.push(newLogin);
@@ -57,10 +53,10 @@ angular.module('fieldApp')
 		$scope.addTimeSlot = function () {
 			if ($scope.checkNewTimeSlot()) {
 				var newSlot = {
-					date: new Date($scope.newTimeSlot.date),
-					taken: false,
+					date   : new Date($scope.newTimeSlot.date),
+					taken  : false,
 					takenBy: null,
-					done: false
+					done   : false
 				};
 				$http.put('/api/fields/' + $scope.field._id, { addSlot: newSlot }).then(function (res) {
 					$scope.field.slots.push(newSlot);
@@ -70,7 +66,7 @@ angular.module('fieldApp')
 			}
 		};
 
-		$scope.updateName = function() {
+		$scope.updateName = function () {
 			if ($scope.field.name && $scope.field.name.length > 0) {
 				$http.put('/api/fields/' + $scope.field._id, { name: $scope.field.name }).then(function () {
 				}, function (err) {
@@ -80,8 +76,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Deletes
-		*/
+		 ** Deletes
+		 */
 		$scope.deleteCorr = function (corr) {
 			if (corr.dueDate) {
 				return;
@@ -114,15 +110,16 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Mails
-		*/
+		 ** Mails
+		 */
 		$scope.sendAll = function () {
 			var cpt = 0;
 			angular.forEach($scope.field.corrections, function (corr) {
 				cpt += (!corr.dueDate) ? 1 : 0;
 			});
-			if ($scope.checkEnoughtTimes(cpt)) {
-				return ;
+			if (!$scope.checkEnoughtTimes(cpt)) {
+				$scope.errorMessage = 'Not enought free time slots.';
+				return;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
 				if (res.data) {
@@ -136,9 +133,10 @@ angular.module('fieldApp')
 
 		$scope.sendSpecific = function (corr) {
 			if (!$scope.checkEnoughtTimes(1)) {
-				return ;
+				$scope.errorMessage = 'Not enought free time slots.';
+				return;
 			}
-			$http.post('/api/fields/' + $scope.field._id, { target : corr.targetName }).then(function (res) {
+			$http.post('/api/fields/' + $scope.field._id, { target: corr.targetName }).then(function (res) {
 				if (res.data) {
 					$scope.field = res.data;
 					original = angular.copy(res.data);
@@ -149,8 +147,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Checks
-		*/
+		 ** Checks
+		 */
 		$scope.checkNewTimeSlot = function () {
 			if ($scope.newTimeSlot.date) {
 				if ($scope.field.slots.map(function (e) {
@@ -189,8 +187,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Toggles menus
-		*/
+		 ** Toggles menus
+		 */
 		$scope.toggleAddLogin = function () {
 			$scope.addingLogin = !$scope.addingLogin;
 			if ($scope.addingLogin) {
@@ -215,8 +213,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Utils
-		*/
+		 ** Utils
+		 */
 		$scope.preventDefault = function ($event) {
 			$event.stopPropagation();
 		};
@@ -225,4 +223,118 @@ angular.module('fieldApp')
 			return angular.equals($scope.field, original);
 		};
 
-	});
+		/*
+		 ** Demo
+		 */
+		$http.get('/api/users/me').then(function (res) {
+			$scope.user = res.data;
+			if ($scope.user.demo) {
+				$scope.field = {
+					'slots'      : [
+						{
+							'date': '2014-06-02T19:00:00.000Z', 'taken': true, 'takenBy': 'bgronon', 'done': false
+						},
+						{
+							'date': '2014-06-02T19:15:00.000Z', 'taken': false, 'takenBy': null, 'done': false
+						}
+					],
+					'corrections': [
+						{
+							'target'    : null,
+							'targetName': 'bgronon',
+							'mailed'    : true,
+							'mailedOn'  : '2014-06-02T18:00:00.000Z',
+							'dueDate'   : '2014-06-02T19:00:00.000Z'
+						},
+						{
+							'target'    : null,
+							'targetName': 'mpillet',
+							'mailed'    : false,
+							'mailedOn'  : null,
+							'dueDate'   : null
+						}
+					]
+				}
+				$scope.selectedCorr = 'bgronon';
+				$timeout(function () {
+					$scope.showIntro();
+				});
+				$http.put('/api/users/me', { noDemo: true });
+			}
+		}, function (err) {
+			console.log(err);
+		});
+
+		$scope.introOptions = {
+			steps          : [
+				{
+					element : '.demo1',
+					intro   : 'Change your project name',
+					position: 'bottom'
+				},
+				{
+					element : '.demo2',
+					intro   : 'Add some time slots,',
+					position: 'right'
+				},
+				{
+					element : '.slots',
+					intro   : 'That will appear here with some indicators',
+					position: 'top'
+				},
+				{
+					element : '.demo3',
+					intro   : 'Some logins of your correctors manually',
+					position: 'right'
+				},
+				{
+					element : '.demo4',
+					intro   : 'Or automatically if you have TrackMyPeers',
+					position: 'left'
+				},
+				{
+					element : '.demo5',
+					intro   : 'Send emails to all the users that was still not mailed',
+					position: 'top'
+				},
+				{
+					element : '.demo6',
+					intro   : 'This guy just accepted a booking !',
+					position: 'left'
+				},
+				{
+					element : '.demo7',
+					intro   : 'Here some info about him',
+					position: 'top'
+				},
+				{
+					element : '.demo8',
+					intro   : 'And you can see the highlight book time of the selected corrector here',
+					position: 'bottom'
+				},
+				{
+					element : '.help-small',
+					intro   : 'You\'re all done ! Please submit an issue on the GitHub or send us a message if there is any problem :)',
+					position: 'top'
+				}
+			],
+			showStepNumbers: false,
+			showBullets    : false,
+			skipLabel      : 'Exit',
+			nextLabel      : '<i class="icon-next"><i>',
+			prevLabel      : '<i class="icon-previous">'
+		};
+
+		$scope.introChange = function (data) {
+			console.log(data);
+		};
+
+		$scope.removeIntro = function () {
+			$timeout(function () {
+				$scope.field = $scope.saveField;
+				$scope.selectedCorr = null;
+			});
+		}
+
+	})
+;

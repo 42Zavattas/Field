@@ -19,7 +19,6 @@ angular.module('fieldApp')
 		$http.get('/api/fields', {params:{next: true}}).then(function(res){
 			$scope.nexts.corrector = res.data.corrector;
 			$scope.nexts.corrected = res.data.corrected;
-			console.log(res.data);
 		});
 
 		$scope.toggleMenu = function () {
