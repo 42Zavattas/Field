@@ -6,7 +6,6 @@ angular.module('fieldApp')
 		var original = angular.copy(data);
 
 		$scope.logins = $resource('/api/logins').query();
-		//var Sync = $resource('/api/users/me');
 
 		$scope.user = null;
 
