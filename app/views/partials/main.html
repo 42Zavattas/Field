@@ -3,10 +3,15 @@
 	Start a new correction process
 	<i class="icon-play"></i>
 </a>
-<div>
-	<select>
-		<option>10</option>
-	</select>
+<div class="memos">
+	<span>Send me memos</span>
+	<div class="custom-select">
+		<span>{{ selectedOpt.text }}</span>
+		<ul class="dropdown">
+			<li ng-if="opt !== selectedOpt" ng-repeat="opt in selectOpts" ng-click="changeOpt(opt)">{{ opt.text }}</li>
+		</ul>
+	</div>
+	<span ng-if="selectedOpt.value > 0">before my meetings.</span>
 </div>
 <ul class="process-list" ng-show="fields.length">
 	<li ng-repeat="field in fields">

@@ -388,7 +388,7 @@ p.info {
 }
 
 .marged {
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
 }
 
 ul.process-list {
@@ -738,6 +738,83 @@ ul.ui-list {
 		transform-origin: 0px 5.1em;
 		-webkit-animation: loader 2s infinite ease;
 		animation: loader 2s infinite ease;
+	}
+}
+
+.memos {
+	padding: 15px 0;
+	font-size: 15px;
+	> span:first-child {
+		margin-right: 5px;
+	}
+	> .custom-select {
+		margin-right: 5px;
+	}
+}
+
+.custom-select {
+	display: inline-block;
+	position: relative;
+	width: 130px;
+	margin: 0 auto 2px auto;
+	padding: 5px;
+	font-size: 15px;
+	@include border-radius(5px);
+	border: 1px solid rgba(0,0,0,0.15);
+	box-shadow: 0 1px 1px rgba(50,50,50,0.1);
+	cursor: pointer;
+	outline: none;
+	> span {
+		margin-left: -5px;
+	}
+	&:after {
+		content: "";
+		width: 0;
+		height: 0;
+		position: absolute;
+		right: 8px;
+		top: 50%;
+		margin-top: -3px;
+		border-width: 6px 6px 0 6px;
+		border-style: solid;
+		border-color: darken($dark1, 15) transparent;
+	}
+	&:hover {
+		@include border-bottom-radius(0);
+		& .dropdown {
+			opacity: 1;
+			z-index: 1;
+		}
+	}
+	& .dropdown {
+		position: absolute;
+		top: 25px;
+		left: -1px;
+		width: 130px;
+
+		right: 0;
+		padding: 0;
+		z-index: -1;
+		background: $dark1;
+		@include border-bottom-radius(5px);
+		border: 1px solid rgba(black, .17);
+		box-shadow: 0 0 5px rgba(black, .1);
+		font-weight: normal;
+		list-style: none;
+		opacity: 0;
+		li {
+			padding: 5px 0;
+			&:hover {
+				background-color: lighten($dark1, 5);
+			}
+			&:last-child {
+				@include border-bottom-radius(5px);
+			}
+		}
+		&:hover {
+			opacity: 1;
+			z-index: 1;
+		}
 	}
 }
 

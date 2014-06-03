@@ -25,4 +25,17 @@ angular.module('fieldApp')
 			$scope.correctorMode = !$scope.correctorMode;
 		};
 
+		$scope.selectOpts = [
+			{ text: 'No', value: -1 },
+			{ text: '15 minutes', value: 15 },
+			{ text: '30 minutes', value: 30 },
+			{ text: '1 hour', value: 60 }
+		];
+
+		$scope.selectedOpt = $scope.selectOpts[0];
+
+		$scope.changeOpt = function (opt) {
+			$scope.selectedOpt = opt;
+		};
+
 	});
