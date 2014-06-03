@@ -3,11 +3,16 @@
 	Start a new correction process
 	<i class="icon-play"></i>
 </a>
+<div>
+	<select>
+		<option>10</option>
+	</select>
+</div>
 <ul class="process-list" ng-show="fields.length">
 	<li ng-repeat="field in fields">
-	<a ng-href="/field/{{ field._id }}">
-		{{ field.name || 'No Name Specified' }}
-	</a>
+		<a ng-href="/field/{{ field._id }}">
+			{{ field.name || 'No Name Specified' }}
+		</a>
 	</li>
 </ul>
 </section>
