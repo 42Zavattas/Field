@@ -59,7 +59,7 @@
 				<i class="icon-cycle"></i> Autoload logins
 			</button>
 			<br>
-			<button class="small featured demo5" type="button" ng-click="sendAll()" ng-disabled="field.corrections.length === 0 || !checkEnoughtTimes(field.corrections.length)">
+			<button class="small featured demo5" type="button" ng-click="sendAll()" ng-disabled="field.corrections.length === 0 || !checkEnoughtTimes()">
 				<i class="icon-paperplane"></i> Email all
 			</button>
 		</div>
@@ -81,7 +81,7 @@
 									<i class="icon-mail" ng-if="corr.mailed"></i>
 									{{ corr.mailedOn | date:'dd/MM HH:mm' }}
 								</p>
-								<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes(1)">
+								<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes()">
 									<i class="icon-mail"></i> Email {{ corr.targetName }}
 								</button>
 								<button class="small" ng-if="!corr.done && corr.dueDate" ng-click="validate(corr.targetName)">

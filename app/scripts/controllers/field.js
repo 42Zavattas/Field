@@ -21,34 +21,6 @@ angular.module('fieldApp')
 
 		$scope.newTimeSlot = { date: null };
 
-		$scope.validate = function (login) {
-			if ($scope.validateLogin === login) {
-				return $scope.validateLogin = null;
-			}
-			$scope.validateLogin = login;
-		};
-
-		$scope.updateScore = function (rate) {
-			$scope.validateScore = rate;
-		};
-
-		$scope.saveScore = function (corr) {
-			var newNote = {
-				user: corr.targetName,
-				note: $scope.validateScore
-			};
-			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function(res) {
-				$scope.validateScore = 0;
-				$scope.validateLogin = null;
-				corr.done = true;
-				$scope.field.slots[$scope.field.slots.map(function(e){
-					return e.takenBy;
-				}).indexOf(corr.targetName)].done = true;
-			}, function(err) {
-				console.log(err);
-			});
-		};
-
 		/*
 		 ** Adds / Updates
 		 */
@@ -143,34 +115,28 @@ angular.module('fieldApp')
 		 ** Mails
 		 */
 		$scope.sendAll = function () {
-			var cpt = 0;
-			angular.forEach($scope.field.corrections, function (corr) {
-				cpt += (!corr.dueDate) ? 1 : 0;
-			});
-			if (!$scope.checkEnoughtTimes(cpt)) {
+			if (!$scope.checkEnoughtTimes()) {
 				$scope.errorMessage = 'Not enought free time slots.';
 				return;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
-				if (res.data) {
-					$scope.field = res.data;
-					original = angular.copy(res.data);
-				}
+				$scope.field.corrections.map(function(e) {
+					e.mailed = true;
+					e.mailedOn = new Date();
+				});
 			}, function (err) {
 				console.log(err);
 			});
 		};
 
 		$scope.sendSpecific = function (corr) {
-			if (!$scope.checkEnoughtTimes(1)) {
+			if (!$scope.checkEnoughtTimes()) {
 				$scope.errorMessage = 'Not enought free time slots.';
 				return;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target: corr.targetName }).then(function (res) {
-				if (res.data) {
-					$scope.field = res.data;
-					original = angular.copy(res.data);
-				}
+				corr.mailed = true;
+				corr.mailedOn = new Date();
 			}, function (err) {
 				console.log(err);
 			});
@@ -191,17 +157,15 @@ angular.module('fieldApp')
 			return (false);
 		};
 
-		$scope.checkEnoughtTimes = function (count) {
+		$scope.checkEnoughtTimes = function () {
 			if ($scope.field.slots.length === 0) {
 				return (false);
 			}
-			var countFree = 0;
-			angular.forEach($scope.field.slots, function (slot) {
-				countFree += (!slot.taken) ? 1 : 0;
+			angular.forEach($scope.field.slots, function(slot) {
+				if (!slot.taken) {
+					return (true);
+				}
 			});
-			if (count > countFree) {
-				return (false);
-			}
 			return (true);
 		};
 
@@ -251,6 +215,37 @@ angular.module('fieldApp')
 
 		$scope.equal = function () {
 			return angular.equals($scope.field, original);
+		};
+
+		/*
+		** Score
+		*/
+		$scope.validate = function (login) {
+			if ($scope.validateLogin === login) {
+				return $scope.validateLogin = null;
+			}
+			$scope.validateLogin = login;
+		};
+
+		$scope.updateScore = function (rate) {
+			$scope.validateScore = rate;
+		};
+
+		$scope.saveScore = function (corr) {
+			var newNote = {
+				user: corr.targetName,
+				note: $scope.validateScore
+			};
+			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function(res) {
+				$scope.validateScore = 0;
+				$scope.validateLogin = null;
+				corr.done = true;
+				$scope.field.slots[$scope.field.slots.map(function(e){
+					return e.takenBy;
+				}).indexOf(corr.targetName)].done = true;
+			}, function(err) {
+				console.log(err);
+			});
 		};
 
 		/*
