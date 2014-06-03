@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('fieldApp')
-	.controller('FieldCtrl', function ($scope, data, $http, $location, $timeout, $resource) {
+	.controller('FieldCtrl', function ($scope, data, me, $http, $location, $timeout, $resource) {
 
 		var original = angular.copy(data);
 
 		$scope.logins = $resource('/api/logins').query();
 
-		$scope.user = null;
+		$scope.user = me.data;
 
 		$scope.field = data;
 		$scope.saveField = $scope.field;
@@ -120,7 +120,7 @@ angular.module('fieldApp')
 				return;
 			}
 			$http.post('/api/fields/' + $scope.field._id, { target: 'all' }).then(function (res) {
-				$scope.field.corrections.map(function(e) {
+				$scope.field.corrections.map(function (e) {
 					e.mailed = true;
 					e.mailedOn = new Date();
 				});
@@ -162,7 +162,7 @@ angular.module('fieldApp')
 				return (false);
 			}
 			var out = false;
-			angular.forEach($scope.field.slots, function(slot) {
+			angular.forEach($scope.field.slots, function (slot) {
 				if (!slot.taken) {
 					out = true;
 				}
@@ -219,8 +219,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		** Score
-		*/
+		 ** Score
+		 */
 		$scope.validate = function (login) {
 			if ($scope.validateLogin === login) {
 				return $scope.validateLogin = null;
@@ -237,14 +237,14 @@ angular.module('fieldApp')
 				user: corr.targetName,
 				note: $scope.validateScore
 			};
-			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function(res) {
+			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function (res) {
 				$scope.validateScore = 0;
 				$scope.validateLogin = null;
 				corr.done = true;
-				$scope.field.slots[$scope.field.slots.map(function(e){
+				$scope.field.slots[$scope.field.slots.map(function (e) {
 					return e.takenBy;
 				}).indexOf(corr.targetName)].done = true;
-			}, function(err) {
+			}, function (err) {
 				console.log(err);
 			});
 		};
@@ -252,44 +252,39 @@ angular.module('fieldApp')
 		/*
 		 ** Demo
 		 */
-		$http.get('/api/users/me').then(function (res) {
-			$scope.user = res.data;
-			if ($scope.user.demo) {
-				$scope.field = {
-					'slots'      : [
-						{
-							'date': '2014-06-02T19:00:00.000Z', 'taken': true, 'takenBy': 'bgronon', 'done': false
-						},
-						{
-							'date': '2014-06-02T19:15:00.000Z', 'taken': false, 'takenBy': null, 'done': false
-						}
-					],
-					'corrections': [
-						{
-							'target'    : null,
-							'targetName': 'bgronon',
-							'mailed'    : true,
-							'mailedOn'  : '2014-06-02T18:00:00.000Z',
-							'dueDate'   : '2014-06-02T19:00:00.000Z'
-						},
-						{
-							'target'    : null,
-							'targetName': 'mpillet',
-							'mailed'    : false,
-							'mailedOn'  : null,
-							'dueDate'   : null
-						}
-					]
-				}
-				$scope.selectedCorr = 'bgronon';
-				$timeout(function () {
-					$scope.showIntro();
-				});
-				$http.put('/api/users/me', { noDemo: true });
+		if ($scope.user.demo) {
+			$scope.field = {
+				'slots'      : [
+					{
+						'date': '2014-06-02T19:00:00.000Z', 'taken': true, 'takenBy': 'bgronon', 'done': false
+					},
+					{
+						'date': '2014-06-02T19:15:00.000Z', 'taken': false, 'takenBy': null, 'done': false
+					}
+				],
+				'corrections': [
+					{
+						'target'    : null,
+						'targetName': 'bgronon',
+						'mailed'    : true,
+						'mailedOn'  : '2014-06-02T18:00:00.000Z',
+						'dueDate'   : '2014-06-02T19:00:00.000Z'
+					},
+					{
+						'target'    : null,
+						'targetName': 'mpillet',
+						'mailed'    : false,
+						'mailedOn'  : null,
+						'dueDate'   : null
+					}
+				]
 			}
-		}, function (err) {
-			console.log(err);
-		});
+			$scope.selectedCorr = 'bgronon';
+			$timeout(function () {
+				$scope.showIntro();
+			});
+			$http.put('/api/users/me', { noDemo: true });
+		}
 
 		$scope.introOptions = {
 			steps          : [

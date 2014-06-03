@@ -16,7 +16,20 @@ angular.module('fieldApp', [
 			.when('/', {
 				templateUrl : 'partials/main',
 				controller  : 'MainCtrl',
-				authenticate: true
+				authenticate: true,
+				resolve     : {
+					me: function ($q, $http) {
+						var deferred = $q.defer();
+						$q.all([
+							$http.get('/api/users/me')
+						]).then(function (res) {
+							deferred.resolve(res[0]);
+						}, function (err) {
+							deferred.reject(err);
+						});
+						return deferred.promise;
+					}
+				}
 			})
 			.when('/login', {
 				templateUrl: 'partials/login',
@@ -37,12 +50,23 @@ angular.module('fieldApp', [
 				authenticate: false
 			})
 			.when('/field/:id', {
-				templateUrl: 'partials/field',
-				controller : 'FieldCtrl',
-				resolve    : {
+				templateUrl : 'partials/field',
+				controller  : 'FieldCtrl',
+				resolve     : {
 					data: function ($resource, $route) {
 						var Field = $resource('/api/fields/:id', { id: '@id' });
 						return Field.get({ id: $route.current.params.id }).$promise;
+					},
+					me  : function ($q, $http) {
+						var deferred = $q.defer();
+						$q.all([
+							$http.get('/api/users/me')
+						]).then(function (res) {
+							deferred.resolve(res[0]);
+						}, function (err) {
+							deferred.reject(err);
+						});
+						return deferred.promise;
 					}
 				},
 				authenticate: true
@@ -81,9 +105,9 @@ angular.module('fieldApp', [
 
 		$rootScope.logout = function () {
 			Auth.logout()
-			.then(function () {
-				$location.path('/login');
-			});
+				.then(function () {
+					$location.path('/login');
+				});
 		};
 
 	});
