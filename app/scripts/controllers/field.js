@@ -161,12 +161,13 @@ angular.module('fieldApp')
 			if ($scope.field.slots.length === 0) {
 				return (false);
 			}
+			var out = false;
 			angular.forEach($scope.field.slots, function(slot) {
 				if (!slot.taken) {
-					return (true);
+					out = true;
 				}
 			});
-			return (true);
+			return (out);
 		};
 
 		$scope.checkLogin = function (login) {
