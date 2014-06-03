@@ -84,12 +84,18 @@
 								<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes(1)">
 									<i class="icon-mail"></i> Email {{ corr.targetName }}
 								</button>
+								<button class="small" ng-if="!corr.done && corr.dueDate" ng-click="validate(corr.targetName)">
+									<i class="icon-checkmark"></i> Validate
+								</button>
 							</div>
 						</div>
 					</header>
-					<section>
-						Validate
-						<rating value="corr.reputation" state-on="'icon-star'" state-off="'icon-star2'"></rating>
+					<section ng-if="!corr.done && corr.dueDate && validateLogin === corr.targetName" class="validate">
+						Give {{ corr.targetName }} a note to proceed
+						<rating value="rate" ng-click="updateScore(rate)" state-on="'icon-star'" state-off="'icon-star2'"></rating>
+						<button class="small" ng-click="saveScore(corr.targetName)">
+							<i class="icon-disk"></i> Save
+						</button>
 					</section>
 
 				</div>
@@ -103,7 +109,7 @@
 					<ul>
 						<li>
 							<span ng-attr-tooltip="{{ corr.mailed && 'Mailed' || 'Not mailed' }}"><i class="icon-mail" ng-class="{ mailed: corr.mailed }"></i></span>
-							<span tooltip="Booked"><i class="icon-calendar" ng-class="{ hidden: !corr.dueDate || corr.dueDate === '1970-01-01T00:00:00.000Z' }"></i></span>
+							<span ng-attr-tooltip="{{ corr.dueDate && !corr.done && 'Booked' || corr.done && 'Done' }}"><i ng-class="{ 'icon-calendar': !corr.done && corr.dueDate, 'icon-checkmark': corr.done, hidden: !corr.dueDate }"></i></span>
 							<i class="icon-info2" ng-class="{ hidden: !corr.requests.length }"></i>
 						</li>
 					</ul>

@@ -182,6 +182,15 @@ body {
 	}
 }
 
+.validate {
+	&.ng-enter {
+		animation: fadeInDown 250ms;
+	}
+	&.ng-leave {
+		animation: fadeOutUp 250ms;
+	}
+}
+
 h1 {
 	font-family: "Reckoner";
 	font-size: 256px;

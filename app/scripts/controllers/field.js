@@ -16,8 +16,34 @@ angular.module('fieldApp')
 		$scope.newLogin = '';
 		$scope.selectedCorr = null;
 		$scope.errorMessage = null;
+		$scope.validateLogin = null;
+		$scope.validateScore = 0;
 
 		$scope.newTimeSlot = { date: null };
+
+		$scope.validate = function (login) {
+			if ($scope.validateLogin === login) {
+				return $scope.validateLogin = null;
+			}
+			$scope.validateLogin = login;
+		};
+
+		$scope.updateScore = function (rate) {
+			$scope.validateScore = rate;
+		};
+
+		$scope.saveScore = function (login) {
+			var newNote = {
+				user: login,
+				note: $scope.validateScore
+			};
+			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function(res) {
+				$scope.validateScore = 0;
+				$scope.validateLogin = null;
+			}, function(err) {
+				console.log(err);
+			});
+		};
 
 		/*
 		 ** Adds / Updates
