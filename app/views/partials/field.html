@@ -93,7 +93,7 @@
 					<section ng-if="!corr.done && corr.dueDate && validateLogin === corr.targetName" class="validate">
 						Give {{ corr.targetName }} a note to proceed
 						<rating value="rate" ng-click="updateScore(rate)" state-on="'icon-star'" state-off="'icon-star2'"></rating>
-						<button class="small" ng-click="saveScore(corr.targetName)">
+						<button class="small" ng-click="saveScore(corr)">
 							<i class="icon-disk"></i> Save
 						</button>
 					</section>

@@ -32,14 +32,18 @@ angular.module('fieldApp')
 			$scope.validateScore = rate;
 		};
 
-		$scope.saveScore = function (login) {
+		$scope.saveScore = function (corr) {
 			var newNote = {
-				user: login,
+				user: corr.targetName,
 				note: $scope.validateScore
 			};
 			$http.put('/api/fields/' + $scope.field._id, { validate: newNote }).then(function(res) {
 				$scope.validateScore = 0;
 				$scope.validateLogin = null;
+				corr.done = true;
+				$scope.field.slots[$scope.field.slots.map(function(e){
+					return e.takenBy;
+				}).indexOf(corr.targetName)].done = true;
 			}, function(err) {
 				console.log(err);
 			});
