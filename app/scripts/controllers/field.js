@@ -218,9 +218,56 @@ angular.module('fieldApp')
 			return angular.equals($scope.field, original);
 		};
 
+		$scope.projects = [
+			'Rush AlCu',
+			'Lem-in 2 : le retour',
+			'Lem-In',
+			'Filler',
+			'Corewar',
+			'PushSwap',
+			'Printf',
+			'HotRace',
+			'GetNextLine',
+			'libft',
+			'42sh',
+			'MiniTalk',
+			'ft_sh3',
+			'ft_sh2',
+			'Pipex',
+			'ft_select',
+			'ft_sh1',
+			'ft_ls',
+			'Raytracer',
+			'RTv1',
+			'Wolf3D',
+			'FdF',
+			'J9: Javascript',
+			'J8: PHP Objet 3',
+			'J7: PHP Objet 2',
+			'J6: PHP Objet 1',
+			'J5: Bases de donnees et SQL',
+			'J4: MAMP 2',
+			'J3: MAMP 1',
+			'J2: PHP 2',
+			'J1: PHP 1',
+			'J0: Environnement Web',
+			'Gros Projet Web',
+			'Projet Framework Web 3',
+			'Projet Framework Web 2',
+			'Projet Framework Web 1',
+			'Lem-IPC',
+			'Zappy',
+			'ft_irc',
+			'ft_p',
+			'Philsophes',
+			'ft_script',
+			'nm-objdump',
+			'Malloc'
+		];
+
 		/*
-		 ** Score
-		 */
+		** Score
+		*/
 		$scope.validate = function (login) {
 			if ($scope.validateLogin === login) {
 				return $scope.validateLogin = null;
@@ -250,8 +297,8 @@ angular.module('fieldApp')
 		};
 
 		/*
-		 ** Demo
-		 */
+		** Demo
+		*/
 		if ($scope.user.demo) {
 			$scope.field = {
 				'slots'      : [
@@ -335,8 +382,8 @@ angular.module('fieldApp')
 				},
 				{
 					element : '.help-small',
-					intro   : 'You\'re all done ! Please submit an issue on the GitHub or send us a message if there is any problem :)',
-					position: 'top'
+	intro   : 'You\'re all done ! Please submit an issue on the GitHub or send us a message if there is any problem :)',
+	position: 'top'
 				}
 			],
 			showStepNumbers: false,
@@ -358,4 +405,4 @@ angular.module('fieldApp')
 		}
 
 	})
-;
+	;

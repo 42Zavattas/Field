@@ -3,7 +3,7 @@
 	<div class="form-control">
 		<i class="icon-pencil"></i>
 		<input required focus-me="true" placeholder="Project Name" type="text" class="demo1 rounded-top"
-		       ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateName()'}">
+		ng-model="field.name" ng-disabled="loading" ui-keypress="{13:'updateName()'}" typeahead="project for project in projects | filter:$viewValue" typeahead-on-select="updateName()">
 	</div>
 
 	<div class="form-control pane">
@@ -14,7 +14,7 @@
 			<div class="inline-form">
 				<ng-datetime date="newTimeSlot.date"></ng-datetime>
 				<button ng-disabled="!checkNewTimeSlot()" ng-click="addTimeSlot()" type="button"
-				        class="rounded-right size-auto">
+					class="rounded-right size-auto">
 					<i class="icon-clock"></i>
 				</button>
 			</div>
@@ -65,30 +65,30 @@
 		</div>
 		<ul class="ui-list" ng-if="field.corrections.length">
 			<li class="correction" ng-repeat="corr in field.corrections" ng-click="selectCorr(corr.targetName)"
-			    ng-class="{ active : selectedCorr === corr.targetName, demo6: corr.targetName === 'bgronon' }">
+				ng-class="{ active : selectedCorr === corr.targetName, demo6: corr.targetName === 'bgronon' }">
 
 				<div ng-click="preventDefault($event)" ng-if="selectedCorr === corr.targetName" class="correction-infos">
 
 					<header>
-						<div class="flex centered demo7">
-							<img class="profile-img" ng-src="https://cdn.42.fr/userprofil/commentview/{{ corr.targetName }}.jpg">
-							<div class="padded">
-								{{ corr.targetName }}
-								<div class="stars">
-									<rating value="corr.reputation" state-on="'icon-star'" state-off="'icon-star2'" readonly="true"></rating>
-								</div>
-								<p class="mail">
-									<i class="icon-mail" ng-if="corr.mailed"></i>
-									{{ corr.mailedOn | date:'dd/MM HH:mm' }}
-								</p>
-								<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes()">
-									<i class="icon-mail"></i> Email {{ corr.targetName }}
-								</button>
-								<button class="small" ng-if="!corr.done && corr.dueDate" ng-click="validate(corr.targetName)">
-									<i class="icon-checkmark"></i> Validate
-								</button>
+					<div class="flex centered demo7">
+						<img class="profile-img" ng-src="https://cdn.42.fr/userprofil/commentview/{{ corr.targetName }}.jpg">
+						<div class="padded">
+							{{ corr.targetName }}
+							<div class="stars">
+								<rating value="corr.reputation" state-on="'icon-star'" state-off="'icon-star2'" readonly="true"></rating>
 							</div>
+							<p class="mail">
+							<i class="icon-mail" ng-if="corr.mailed"></i>
+							{{ corr.mailedOn | date:'dd/MM HH:mm' }}
+							</p>
+							<button class="small" ng-click="sendSpecific(corr)" ng-hide="corr.mailed" ng-disabled="!checkEnoughtTimes()">
+								<i class="icon-mail"></i> Email {{ corr.targetName }}
+							</button>
+							<button class="small" ng-if="!corr.done && corr.dueDate" ng-click="validate(corr.targetName)">
+								<i class="icon-checkmark"></i> Validate
+							</button>
 						</div>
+					</div>
 					</header>
 					<section ng-if="!corr.done && corr.dueDate && validateLogin === corr.targetName" class="validate">
 						Give {{ corr.targetName }} a note to proceed<br>

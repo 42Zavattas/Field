@@ -36,6 +36,10 @@ i {
 	vertical-align: middle;
 }
 
+strong {
+	font-weight: 800;
+}
+
 .introjs-tooltiptext {
 	font-size: 15px;
 }
@@ -815,6 +819,12 @@ ul.ui-list {
 			opacity: 1;
 			z-index: 1;
 		}
+	}
+}
+
+.dropdown-menu {
+	a {
+		text-decoration: none;
 	}
 }
 
