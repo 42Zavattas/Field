@@ -297,7 +297,7 @@ angular.module('fieldApp')
 					return e.takenBy;
 				}).indexOf(corr.targetName)].done = true;
 				$http.get('/api/logins/' + corr.targetName).then(function(res){
-					corr.reputation = res.data.reputation.total / res.data.repuation.count;
+					corr.reputation = res.data.reputation.total / res.data.reputation.count;
 				}, function (err) {
 					console.log(err);
 				});
