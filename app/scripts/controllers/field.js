@@ -34,6 +34,11 @@ angular.module('fieldApp')
 				};
 				$http.put('/api/fields/' + $scope.field._id, { addLogin: newLogin }).then(function (res) {
 					$scope.field.corrections.push(newLogin);
+					$http.get('/api/logins/' + newLogin.targetName).then(function(res) {
+						$scope.field.corrections[$scope.field.corrections.length - 1].reputation = res.data.reputation.total / res.data.reputation.count;
+					}, function (err){
+						console.log(err);
+					})
 					if (reset) {
 						$scope.newLogin = '';
 					}
@@ -291,6 +296,11 @@ angular.module('fieldApp')
 				$scope.field.slots[$scope.field.slots.map(function (e) {
 					return e.takenBy;
 				}).indexOf(corr.targetName)].done = true;
+				$http.get('/api/logins/' + corr.targetName).then(function(res){
+					corr.reputation = res.data.reputation.total / res.data.repuation.count;
+				}, function (err) {
+					console.log(err);
+				});
 			}, function (err) {
 				console.log(err);
 			});
