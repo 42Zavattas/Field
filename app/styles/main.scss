@@ -825,7 +825,14 @@ ul.ui-list {
 .dropdown-menu {
 	a {
 		text-decoration: none;
+		outline: none !important;
 	}
+	& > .active > a,
+	& > .active > a:focus,
+	& > .active > a:hover {
+		background-color: $blue !important;
+	}
+
 }
 
 @-webkit-keyframes loader {
